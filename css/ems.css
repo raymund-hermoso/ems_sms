@@ -1,0 +1,47 @@
+.topbar.navbar-light .navbar-nav .nav-item.active .nav-link {
+    color: #b7b9cc;
+}
+.topbar.navbar-light .navbar-nav .nav-item .nav-link {
+    color: #858796;
+}
+
+/* Branding */
+.navbar-brand {
+    width: 10%;
+    text-align: center;
+    display: flex;
+}
+#cust-brand-text span {
+    color: #224abe;
+}
+
+/* Home Slider */
+#home-sec {
+    background-size: cover;
+}
+#home-sec h1 {
+    padding: 300px 200px 200px 200px;
+    text-align: center;
+    font-size: 100px;
+    line-height: 110px;
+    color: #fff;
+    margin: 0;
+}
+
+.custom-heading-h2 {
+    text-align: center;
+    padding-bottom: 30px;
+    font-size: 40px;
+    line-height: 45px;
+    text-transform: uppercase;
+}
+.section {
+    padding: 100px 0;
+}
+
+.daterangepicker select{
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    transition: none;
+}

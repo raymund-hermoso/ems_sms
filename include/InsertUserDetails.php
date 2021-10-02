@@ -37,6 +37,19 @@ class InsertUserDetails extends DbConnection{
     }
 
     //
+    public function add_faculty($id_number){
+        $sql = "INSERT INTO tbl_faculty (school_id_number) VALUES ('$id_number')";
+        $query = $this->connection->query($sql);
+
+        if ($query === TRUE) {
+            $_SESSION['message'] = 'New Faculty added';
+            header('location:../admin/faculty.php');
+        } else {
+            return false;
+        }
+    }
+
+    //
     public function add_dh($id_number, $department){
         $sql = "INSERT INTO tbl_department_head (school_id_number, department_id) VALUES ('$id_number', '$department')";
         $query = $this->connection->query($sql);

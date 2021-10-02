@@ -54,6 +54,28 @@ class FetchUser extends DbConnection{
             return false;
         }
     }
+
+    //Department Head Users
+    public function getUsersFaculty(){
+ 
+        $sql = "SELECT a.*, b.* FROM tbl_faculty AS a LEFT JOIN tbl_users AS b ON a.school_id_number = b.id_number";
+        $query = $this->connection->query($sql);
+ 
+        if($query->num_rows > 0){
+            while($row = $query->fetch_assoc()){
+                echo '<tr>
+                        <td>'.$row['school_id_number'].'</td>
+                        <td>'.$row['firstname'].' '.$row['lastname'].'</td>
+                        <td>'.$row['email'].'</td>
+                        <td>'.$row['mobile_number'].'</td>
+                        <td><a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a></td>
+                    </tr>';
+            }
+        }
+        else{
+            return false;
+        }
+    }
  
     public function details($sql){
  

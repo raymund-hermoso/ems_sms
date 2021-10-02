@@ -55,8 +55,11 @@
                                         <button type="submit" name="login" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
-            
                                     </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="../">Back to homepage!</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

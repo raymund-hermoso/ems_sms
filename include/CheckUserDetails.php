@@ -95,6 +95,21 @@ class CheckUserDetails extends DbConnection{
         }
     }
 
+    //Check ID Number tbl_student
+    public function check_id_number_faculty($id_number){
+ 
+        $sql = "SELECT * FROM tbl_faculty WHERE school_id_number = '$id_number'";
+        $query = $this->connection->query($sql);
+ 
+        if($query->num_rows > 0){
+            $row = $query->fetch_array();
+            return $row['school_id_number'];
+        }
+        else{
+            return false;
+        }
+    }
+
     //Check ID Number tbl_dh
     public function check_id_number_dh($id_number){
  

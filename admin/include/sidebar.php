@@ -87,7 +87,7 @@
             <span>Users</span>
         </a>
     <?php 
-    if($page == 'student.php' || $page == 'department_head.php'){
+    if($page == 'student.php' || $page == 'department_head.php' || $page == 'faculty.php'){
     ?>
         <div id="collapsePages" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <?php

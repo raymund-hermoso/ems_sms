@@ -34,7 +34,6 @@ if(isset($_POST['register'])){
 
 	// $check_password = $user->check_password($password);
 
-
 	if($check_id_number){
 		$_SESSION['message'] = 'ID Number already exists';
     	header('location:../register.php?id_no='.$id_number.'&fname='.$firstname.'&mname='.$middlename.'&lname='.$lastname.'&email='.$email.'&course='.$course.'&mobile_number='.$mobile_number.'&username='.$username);
@@ -80,7 +79,8 @@ if(isset($_POST['register'])){
     // 	header('location:../register.php?id_no='.$id_number.'&fname='.$firstname.'&mname='.$middlename.'&lname='.$lastname.'&email='.$email.'&course='.$course.'&mobile_number='.$mobile_number.'&username='.$username);
 	// }
 	else{
-		echo 'error1';
+		$_SESSION['message'] = 'Not Registered ID Number';
+    	header('location:../register.php?id_no='.$id_number.'&fname='.$firstname.'&mname='.$middlename.'&lname='.$lastname.'&email='.$email.'&course='.$course.'&mobile_number='.$mobile_number.'&username='.$username);
 	}
 
 }

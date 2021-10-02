@@ -17,6 +17,7 @@
             <script>
                 AOS.init();
             </script>
+            <script src="../js/sticky-nav.js"></script>
     <?php	
         }
         else{
@@ -39,7 +40,6 @@
     <?php
         }
     ?>
-    <script src="../js/sticky-nav.js"></script>
 
 </body>
 

@@ -5,6 +5,13 @@
     color: #858796;
 }
 
+#navbar_top {
+    margin-bottom: 0 !important;
+}
+#event-sec {
+    background-color: #fff;
+}
+
 /* Branding */
 .navbar-brand {
     width: 10%;
@@ -44,4 +51,8 @@
     -moz-transition: none;
     -o-transition: none;
     transition: none;
+}
+
+input.error {
+    border-color: #e00;
 }

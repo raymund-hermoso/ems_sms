@@ -58,7 +58,7 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="../">Back to homepage!</a>
+                                        <a class="small" href="../pages/home.php">Back to homepage!</a>
                                     </div>
                                 </div>
                             </div>

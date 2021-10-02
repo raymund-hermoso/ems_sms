@@ -92,7 +92,7 @@
 </div>
 <!-- End of Page Wrapper -->
 
-<!-- Add Student Modal-->
+<!-- Add Faculty Modal-->
 <div class="modal fade" id="AddFacultyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form class="user" method="POST" action="../include/add_faculty_process.php">

@@ -56,3 +56,11 @@
 input.error {
     border-color: #e00;
 }
+
+/* message */
+#user_message {
+    position: absolute;
+    z-index: 1;
+    right: 10px;
+    top: 10px;
+}

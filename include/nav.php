@@ -188,7 +188,7 @@
                     <?php 
                         if($row['role'] == 'department head'){
                     ?>
-                        <a href="#" class="dropdown-item" data-toggle="modal" data-target="#RequestEventModal">
+                        <a href="#" class="dropdown-item" data-toggle="modal" data-target="#AddEventModal">
                             <i class="fas fa-calendar fa-sm fa-fw mr-2 text-gray-400"></i>
                             Request Event
                         </a>
@@ -218,9 +218,9 @@
 <!-- End of Topbar -->
 
 <!-- Request Event Modal-->
-<div class="modal fade" id="RequestEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <form class="user" method="POST" action="../include/request_event_process.php">
+<div class="modal fade" id="AddEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <form class="user" method="POST" action="../include/add_event_process.php">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Request Event</h5>
@@ -230,11 +230,24 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control form-control-user" placeholder="Enter ID Number" name="id_number" autofocus>
+                        <label>Event Title</label>
+                        <input type="text" class="form-control form-control-user" name="title" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="description" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Venue</label>
+                        <input type="text" class="form-control form-control-user" name="venue" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Schedule Date/Time</label>
+                        <input type="text" id="event_datetime" class="form-control form-control-user" name="event_datetime" required>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" name="add_dh" class="btn btn-primary btn-user btn-block">Add</button>
+                    <button type="submit" name="add_event" class="btn btn-primary btn-user btn-block">Request</button>
                     <button class="btn btn-secondary btn-user btn-block" type="button" data-dismiss="modal">Cancel</button>
                 </div>
             </div>

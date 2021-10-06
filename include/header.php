@@ -38,6 +38,11 @@
 				<!-- aos -->
   				<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+				<!-- daterange picker -->
+				<link rel="stylesheet" href="../css/daterangepicker.css">
+				  
+				
+
 		<?php	
 			}
 			else{
@@ -61,3 +66,17 @@
 </head>
 
 <body class="bg-gradient-primary" id="page-top">
+<?php
+    if(isset($_SESSION['message'])){
+?>
+        <div id="user_message" class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+            <?php echo $_SESSION['message']; ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+<?php
+
+        unset($_SESSION['message']);
+    }
+?>

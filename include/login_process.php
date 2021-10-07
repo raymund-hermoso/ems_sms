@@ -30,6 +30,7 @@ if(isset($_POST['login'])){
 			header('location:../index.php?username='.$username);
 		}
 		else{
+			$_SESSION['role'] = $row['role'];
 			$log->login_log($auth);
 		}
 	}

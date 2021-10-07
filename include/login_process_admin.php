@@ -2,8 +2,10 @@
 //start session
 session_start();
  
+include_once('InsertUserDetails.php');
 include_once('CheckUserDetails.php');
 
+$log = new InsertUserDetails(); 
 $user = new CheckUserDetails();
  
 if(isset($_POST['login'])){
@@ -26,9 +28,8 @@ if(isset($_POST['login'])){
 			header('location:../admin/index.php?username='.$username);
 		}
 		else{
-			$_SESSION['user_id'] = $auth;
 			$_SESSION['role'] = $row['role'];
-			header('location: ../admin/home.php');
+			$log->login_log($auth);
 		}
 	}
 }

@@ -38,8 +38,6 @@
                 
                 <script src="../../js/moment.min.js"></script>
 
-                <!-- date-range-picker -->
-                <script src="../../js/daterangepicker.js"></script>
         <?php	
             }
             else{
@@ -63,23 +61,9 @@
                 
                 <script src="../js/moment.min.js"></script>
 
-                <!-- date-range-picker -->
-                <script src="../js/daterangepicker.js"></script>
         <?php
             }
         ?>
-
-        <script>
-            $(function(){
-                $('#event_datetime').daterangepicker({
-                    timePicker: true,
-                    timePickerIncrement: 30,
-                    locale: {
-                        format: 'MM/DD/YYYY hh:mm A'
-                    }
-                })
-            });
-        </script>
 
     </body>
 </html>

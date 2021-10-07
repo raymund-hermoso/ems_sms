@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2021 at 05:43 PM
+-- Generation Time: Oct 07, 2021 at 05:06 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -103,7 +103,10 @@ CREATE TABLE `tbl_event` (
   `title` varchar(200) NOT NULL,
   `event_desc` varchar(200) NOT NULL,
   `venue` varchar(200) NOT NULL,
-  `date_time` varchar(200) NOT NULL,
+  `date_start` date DEFAULT NULL,
+  `date_end` date DEFAULT NULL,
+  `time_start` time DEFAULT NULL,
+  `time_end` time DEFAULT NULL,
   `status` varchar(200) NOT NULL,
   `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -112,10 +115,8 @@ CREATE TABLE `tbl_event` (
 -- Dumping data for table `tbl_event`
 --
 
-INSERT INTO `tbl_event` (`event_id`, `title`, `event_desc`, `venue`, `date_time`, `status`, `user_id`) VALUES
-(1, 'Title', 'Desc', 'Ven', '10/06/2021 12:00 AM - 10/07/2021 12:00 AM', '', 45),
-(2, 'Title 1', 'Desc 1', 'venue 1', '10/07/2021 12:00 AM - 11/08/2021 11:00 PM', '', 45),
-(3, 'Title 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut a', 'venue 3', '11/09/2021 12:00 AM - 11/11/2021 11:00 PM', '', 45);
+INSERT INTO `tbl_event` (`event_id`, `title`, `event_desc`, `venue`, `date_start`, `date_end`, `time_start`, `time_end`, `status`, `user_id`) VALUES
+(7, 'The title of the Event', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut a', 'Anywhere', '2021-10-08', '2021-10-09', '10:30:00', '17:30:00', '', 45);
 
 -- --------------------------------------------------------
 
@@ -165,7 +166,25 @@ INSERT INTO `tbl_log` (`id`, `user_id`, `date`, `log_type`) VALUES
 (29, 43, '2021-10-02 21:12:18', 'login'),
 (30, 45, '2021-10-06 22:18:14', 'login'),
 (31, 45, '2021-10-06 23:08:47', 'login'),
-(32, 45, '2021-10-06 23:11:48', 'login');
+(32, 45, '2021-10-06 23:11:48', 'login'),
+(33, 45, '2021-10-07 19:11:09', 'login'),
+(34, 45, '2021-10-07 19:12:15', 'login'),
+(35, 2, '2021-10-07 19:18:18', 'login'),
+(36, 2, '2021-10-07 19:18:41', 'login'),
+(37, 45, '2021-10-07 19:20:21', 'login'),
+(38, 2, '2021-10-07 19:21:42', 'login'),
+(39, 2, '2021-10-07 19:22:01', 'login'),
+(40, 2, '2021-10-07 19:22:42', 'login'),
+(41, 2, '2021-10-07 19:24:13', 'login'),
+(42, 2, '2021-10-07 19:24:29', 'login'),
+(43, 2, '2021-10-07 19:26:47', 'login'),
+(44, 2, '2021-10-07 19:27:13', 'login'),
+(45, 45, '2021-10-07 19:30:48', 'login'),
+(46, 45, '2021-10-07 19:34:31', 'login'),
+(47, 2, '2021-10-07 19:46:13', 'login'),
+(48, 45, '2021-10-07 20:46:37', 'login'),
+(49, 45, '2021-10-07 21:06:58', 'login'),
+(50, 2, '2021-10-07 22:31:46', 'login');
 
 -- --------------------------------------------------------
 
@@ -306,7 +325,7 @@ ALTER TABLE `tbl_department_head`
 -- AUTO_INCREMENT for table `tbl_event`
 --
 ALTER TABLE `tbl_event`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_faculty`
@@ -318,7 +337,7 @@ ALTER TABLE `tbl_faculty`
 -- AUTO_INCREMENT for table `tbl_log`
 --
 ALTER TABLE `tbl_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `tbl_student`

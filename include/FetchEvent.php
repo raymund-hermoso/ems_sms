@@ -19,9 +19,8 @@ class FetchEvent extends DbConnection{
             while($row = $query->fetch_assoc()){
                 echo '<tr>
                         <td>'.$row['title'].'</td>
-                        <td>'.$row['description'].'</td>
-                        <td>'.$row['start_time_date'].'</td>
-                        <td>'.$row['end_time_date'].'</td>
+                        <td>'.$row['date_start'].' | '.$row['time_start'].'</td>
+                        <td>'.$row['date_end'].' | '.$row['time_end'].'</td>
                         <td>'.$row['venue'].'</td>
                         <td>'.$row['status'].'</td>
                         <td><a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a></td>

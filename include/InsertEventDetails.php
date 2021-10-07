@@ -10,11 +10,11 @@ class InsertEventDetails extends DbConnection{
 
 
     //
-    public function add_event($title, $description, $venue, $event_datetime){
+    public function add_event($title, $description, $venue, $date_start, $date_end, $time_start, $time_end){
         
         $user_id = $_SESSION['user_id'];
 
-        $sql = "INSERT INTO tbl_event (title, event_desc, venue, date_time, user_id) VALUES ('$title', '$description', '$venue', '$event_datetime', '$user_id')";
+        $sql = "INSERT INTO tbl_event (title, event_desc, venue, date_start, date_end, time_start, time_end, user_id) VALUES ('$title', '$description', '$venue', '$date_start', '$date_end', '$time_start', '$time_end', '$user_id')";
         $query = $this->connection->query($sql);
 
         if ($query === TRUE) {

@@ -70,8 +70,12 @@ class InsertUserDetails extends DbConnection{
  
         if ($query === TRUE) {
             $_SESSION['user_id'] = $auth;
-			$_SESSION['role'] = $row['role'];
-			header('location: ../pages/home.php');
+            if($_SESSION['role'] == 'admin'){
+                header('location: ../admin/home.php');
+            }
+            else{
+                header('location: ../pages/home.php');
+            }
         } else {
             return false;
         }

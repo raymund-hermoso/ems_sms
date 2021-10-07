@@ -241,9 +241,24 @@
                         <label>Venue</label>
                         <input type="text" class="form-control form-control-user" name="venue" required>
                     </div>
-                    <div class="form-group">
-                        <label>Schedule Date/Time</label>
-                        <input type="text" id="event_datetime" class="form-control form-control-user" name="event_datetime" required>
+                    
+                    <div class="form-group row">
+                        <div class="col-sm-3 mb-3 mb-sm-0">
+                            <label>Date Start</label>
+                            <input type="date" class="form-control form-control-user no-pad-h" id="date_start" name="date_start" required>
+                        </div>
+                        <div class="col-sm-3 mb-3 mb-sm-0">
+                            <label>Time Start</label>
+                            <input type="time" class="form-control form-control-user no-pad-h" id="time_start" name="time_start" required>
+                        </div>
+                        <div class="col-sm-3 mb-3 mb-sm-0">
+                            <label>Date End</label>
+                            <input type="date" class="form-control form-control-user no-pad-h" id="date_end" name="date_end" required>
+                        </div>
+                        <div class="col-sm-3 mb-3 mb-sm-0">
+                            <label>Time End</label>
+                            <input type="time" class="form-control form-control-user no-pad-h" id="time_end" name="time_end" required>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -64,3 +64,8 @@ input.error {
     right: 10px;
     top: 10px;
 }
+
+/* Form */
+.no-pad-h {
+    padding: 0 20px !important;
+}

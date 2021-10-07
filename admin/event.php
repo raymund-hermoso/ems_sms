@@ -53,7 +53,6 @@
                                 <thead>
                                     <tr>
                                         <th>Title</th>
-                                        <th>Description</th>
                                         <th>Start</th>
                                         <th>End</th>
                                         <th>Venue</th>
@@ -63,8 +62,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                    <th>Title</th>
-                                        <th>Description</th>
+                                        <th>Title</th>
                                         <th>Start</th>
                                         <th>End</th>
                                         <th>Venue</th>

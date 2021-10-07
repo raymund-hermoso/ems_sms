@@ -12,7 +12,6 @@
 			header('location:../admin/index.php');
 		}
 		else{
-			$log->login_log($auth);
 			session_destroy();
 			header('location:../index.php');
 		}

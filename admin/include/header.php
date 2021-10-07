@@ -32,9 +32,6 @@
                 <!-- Custom styles for this template-->
                 <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
 
-				<!-- daterange picker -->
-				<link rel="stylesheet" href="../../css/daterangepicker.css">
-
 				<!-- Custom styles ems.css-->
                 <link href="../css/ems.css" rel="stylesheet">
 		<?php	
@@ -49,9 +46,6 @@
 
 				<!-- Custom styles for this page -->
 				<link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-				<!-- daterange picker -->
-				<link rel="stylesheet" href="../css/daterangepicker.css">
 
 				<!-- Custom styles ems.css-->
                 <link href="../css/ems.css" rel="stylesheet">

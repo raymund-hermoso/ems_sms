@@ -11,9 +11,12 @@ if(isset($_POST['add_event'])){
 	$title = $insert_event->escape_string($_POST['title']);
 	$description = $insert_event->escape_string($_POST['description']);
 	$venue = $insert_event->escape_string($_POST['venue']);
-	$event_datetime = $insert_event->escape_string($_POST['event_datetime']);
+	$date_start = $insert_event->escape_string($_POST['date_start']);
+	$date_end = $insert_event->escape_string($_POST['date_end']);
+	$time_start = $insert_event->escape_string($_POST['time_start']);
+	$time_end = $insert_event->escape_string($_POST['time_end']);
  
-	$insert_event->add_event($title, $description, $venue, $event_datetime);
+	$insert_event->add_event($title, $description, $venue, $date_start, $date_end, $time_start, $time_end);
 }
 else{
 	$_SESSION['message'] = 'Error';

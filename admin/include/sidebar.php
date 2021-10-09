@@ -45,7 +45,7 @@
 
     <!-- Nav Item - Event -->
     <?php 
-    if($page == 'event.php'){
+    if($page == 'event.php' || $page == 'view-event.php' ){
     ?>
     <li class="nav-item active">
     <?php

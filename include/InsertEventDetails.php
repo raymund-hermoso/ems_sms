@@ -14,12 +14,19 @@ class InsertEventDetails extends DbConnection{
         
         $user_id = $_SESSION['user_id'];
 
-        $sql = "INSERT INTO tbl_event (title, event_desc, venue, date_start, date_end, time_start, time_end, user_id) VALUES ('$title', '$description', '$venue', '$date_start', '$date_end', '$time_start', '$time_end', '$user_id')";
+        $sql = "INSERT INTO tbl_event (title, event_desc, venue, date_start, date_end, time_start, time_end, status, user_id) VALUES ('$title', '$description', '$venue', '$date_start', '$date_end', '$time_start', '$time_end', 'request', '$user_id')";
         $query = $this->connection->query($sql);
 
         if ($query === TRUE) {
-            $_SESSION['message'] = 'Event Created';
-            header('location:../pages/home.php');
+            if($_SESSION['role'] == 'admin'){
+                $_SESSION['message'] = 'Event Created';
+                header('location:../admin/event.php');
+            }
+            else{
+                $_SESSION['message'] = 'Event Created';
+                header('location:../pages/home.php');
+            }
+            
         } else {
             return false;
         }

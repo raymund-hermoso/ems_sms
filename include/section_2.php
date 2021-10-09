@@ -10,7 +10,6 @@
                 $event = new FetchEvent();
                 $event->getEventDetails();
             ?>
-
         </div>
     </div>
 </section>

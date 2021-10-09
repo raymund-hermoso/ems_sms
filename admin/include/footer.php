@@ -38,6 +38,10 @@
                 
                 <script src="../../js/moment.min.js"></script>
 
+                <!-- date_time -->
+                <script src="../../js/date_time.js"></script>
+
+
         <?php	
             }
             else{
@@ -60,6 +64,9 @@
                 <script src="../js/demo/datatables-demo.js"></script>
                 
                 <script src="../js/moment.min.js"></script>
+
+                <!-- date_time -->
+                <script src="../js/date_time.js"></script>
 
         <?php
             }

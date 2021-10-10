@@ -28,15 +28,9 @@
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
                             <form class="user" method="POST" action="include/register_process.php">
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user"
-                                            placeholder="ID Number" value="<?php if(isset($_GET['id_no']) ? $_GET['id_no'] : ''){echo $_GET['id_no'];} ?>" name="id_no" required>
-                                    </div>
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user"
-                                            placeholder="Course" value="<?php if(isset($_GET['course']) ? $_GET['course'] : ''){echo $_GET['course'];} ?>" name="course">
-                                    </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user"
+                                        placeholder="ID Number" value="<?php if(isset($_GET['id_no']) ? $_GET['id_no'] : ''){echo $_GET['id_no'];} ?>" name="id_no" required>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user"

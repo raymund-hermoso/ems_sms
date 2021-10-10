@@ -1,6 +1,7 @@
 <?php
     include_once('../include/session_auth.php');
     include_once('../include/FetchUser.php');
+    include_once('../include/FetchCourse.php');
     include_once('include/header.php');
 ?>
 <!-- Page Wrapper -->
@@ -57,6 +58,7 @@
                                         <th>Email</th>
                                         <th>Course</th>
                                         <th>Mobile Number</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -67,6 +69,7 @@
                                         <th>Email</th>
                                         <th>Course</th>
                                         <th>Mobile Number</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </tfoot>
@@ -108,6 +111,15 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <input type="text" class="form-control form-control-user" placeholder="Enter ID Number" name="id_number" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Course</label>
+                        <select class="form-control form-control-user select2" style="height: 70px" name="course">
+                            <?php 
+                                $course = new FetchCourse();
+                                $course->getCourseDropdown();
+                            ?>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">

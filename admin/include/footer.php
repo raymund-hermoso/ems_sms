@@ -45,10 +45,22 @@
         <?php	
             }
             else{
+
+                $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
+
+                if($page == 'event.php'){
+        ?>
+                    <!-- date_time -->
+                    <script src="../js/date_time.js"></script>
+        <?php 
+                }
         ?>
                 <!-- Bootstrap core JavaScript-->
                 <script src="../vendor/jquery/jquery.min.js"></script>
                 <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+                <!-- Select2 -->
+                <script src="../js/select2.full.min.js"></script>
 
                 <!-- Core plugin JavaScript-->
                 <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -65,8 +77,14 @@
                 
                 <script src="../js/moment.min.js"></script>
 
-                <!-- date_time -->
-                <script src="../js/date_time.js"></script>
+                <script>
+                    $(function () {
+                        //Initialize Select2 Elements
+                        $('.select2').select2({
+                            dropdownParent: $('#AddStudentModal')
+                        });
+                    })
+                </script>
 
         <?php
             }

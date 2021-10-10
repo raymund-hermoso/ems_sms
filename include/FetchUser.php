@@ -12,7 +12,7 @@ class FetchUser extends DbConnection{
     //Student Users
     public function getUsersStudent(){
  
-        $sql = "SELECT a.*, b.* FROM tbl_student AS a LEFT JOIN tbl_users AS b ON a.school_id_number = b.id_number";
+        $sql = "SELECT a.*, b.*, c.* FROM tbl_student AS a LEFT JOIN tbl_users AS b ON a.school_id_number = b.id_number LEFT JOIN tbl_course AS c ON a.course_id = c.id";
         $query = $this->connection->query($sql);
  
         if($query->num_rows > 0){
@@ -23,6 +23,14 @@ class FetchUser extends DbConnection{
                         <td>'.$row['email'].'</td>
                         <td>'.$row['course'].'</td>
                         <td>'.$row['mobile_number'].'</td>
+                        <td>';
+                        if($row['id_number'] == ''){
+                            echo '<span class="badge badge-warning">Not Registered</span>';
+                        }
+                        else{
+                            echo '<span class="badge badge-success">Registered</span>';
+                        }
+                echo    '</td>
                         <td><a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a></td>
                     </tr>';
             }
@@ -46,6 +54,14 @@ class FetchUser extends DbConnection{
                         <td>'.$row['email'].'</td>
                         <td>'.$row['department_name'].'</td>
                         <td>'.$row['mobile_number'].'</td>
+                        <td>';
+                        if($row['id_number'] == ''){
+                            echo '<span class="badge badge-warning">Not Registered</span>';
+                        }
+                        else{
+                            echo '<span class="badge badge-success">Registered</span>';
+                        }
+                echo    '</td>
                         <td><a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a></td>
                     </tr>';
             }
@@ -68,6 +84,14 @@ class FetchUser extends DbConnection{
                         <td>'.$row['firstname'].' '.$row['lastname'].'</td>
                         <td>'.$row['email'].'</td>
                         <td>'.$row['mobile_number'].'</td>
+                        <td>';
+                        if($row['id_number'] == ''){
+                            echo '<span class="badge badge-warning">Not Registered</span>';
+                        }
+                        else{
+                            echo '<span class="badge badge-success">Registered</span>';
+                        }
+                echo    '</td>
                         <td><a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a></td>
                     </tr>';
             }

@@ -9,11 +9,11 @@ class InsertUserDetails extends DbConnection{
     }
  
     //
-    public function add_user($id_number, $firstname, $middlename, $lastname, $email, $course, $mobile_number, $username, $password){
+    public function add_user($id_number, $firstname, $middlename, $lastname, $email, $mobile_number, $username, $password){
 
         $hash_pwd = password_hash($password, PASSWORD_DEFAULT);
  
-        $sql = "INSERT INTO tbl_users (id_number, firstname, middlename, lastname, email, course, mobile_number, username, password) VALUES ('$id_number', '$firstname', '$middlename', '$lastname', '$email', '$course', '$mobile_number', '$username', '$hash_pwd')";
+        $sql = "INSERT INTO tbl_users (id_number, firstname, middlename, lastname, email, mobile_number, username, password) VALUES ('$id_number', '$firstname', '$middlename', '$lastname', '$email', '$mobile_number', '$username', '$hash_pwd')";
         $query = $this->connection->query($sql);
 
         if ($query === TRUE) {
@@ -24,8 +24,8 @@ class InsertUserDetails extends DbConnection{
     }
 
     //
-    public function add_student($id_number){
-        $sql = "INSERT INTO tbl_student (school_id_number) VALUES ('$id_number')";
+    public function add_student($id_number, $course){
+        $sql = "INSERT INTO tbl_student (school_id_number, course_id) VALUES ('$id_number', '$course')";
         $query = $this->connection->query($sql);
 
         if ($query === TRUE) {

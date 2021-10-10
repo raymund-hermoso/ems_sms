@@ -16,7 +16,6 @@ if(isset($_POST['register'])){
 	$middlename = $user->escape_string($_POST['mname']);
 	$lastname = $user->escape_string($_POST['lname']);
 	$email = $user->escape_string($_POST['email']);
-	$course = $user->escape_string($_POST['course']);
 	$mobile_number = $user->escape_string($_POST['mobile_number']);
 	$username = $user->escape_string($_POST['username']);
 	$password = $user->escape_string($_POST['password']);
@@ -59,7 +58,7 @@ if(isset($_POST['register'])){
     	header('location:../register.php?id_no='.$id_number.'&fname='.$firstname.'&mname='.$middlename.'&lname='.$lastname.'&email='.$email.'&course='.$course.'&mobile_number='.$mobile_number.'&username='.$username);
 	}
 	else if($school_id_number_student !== false){
-		if($insert_user->add_user($id_number, $firstname, $middlename, $lastname, $email, $course, $mobile_number, $username, $password)){
+		if($insert_user->add_user($id_number, $firstname, $middlename, $lastname, $email, $mobile_number, $username, $password)){
 			$update_user->update_role_student($school_id_number_student);
 		}
 		else{
@@ -67,7 +66,7 @@ if(isset($_POST['register'])){
 		}
 	}
 	else if($school_id_number_dh !== false){
-		if($insert_user->add_user($id_number, $firstname, $middlename, $lastname, $email, $course, $mobile_number, $username, $password)){
+		if($insert_user->add_user($id_number, $firstname, $middlename, $lastname, $email, $mobile_number, $username, $password)){
 			$update_user->update_role_department_head($school_id_number_dh);
 		}
 		else{

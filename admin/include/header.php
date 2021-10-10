@@ -49,6 +49,10 @@
 
 				<!-- Custom styles ems.css-->
                 <link href="../css/ems.css" rel="stylesheet">
+
+				<!-- Select2 -->
+				<link rel="stylesheet" href="../css/select2.min.css">
+				<link rel="stylesheet" href="../css/select2-bootstrap4.min.css">
 		<?php
 			}
 		?>

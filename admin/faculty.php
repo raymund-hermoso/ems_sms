@@ -56,6 +56,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Mobile Number</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -65,6 +66,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Mobile Number</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </tfoot>

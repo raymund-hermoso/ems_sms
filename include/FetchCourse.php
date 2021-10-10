@@ -30,6 +30,22 @@ class FetchCourse extends DbConnection{
         }
     }
 
+    //Course Dropdown
+    public function getCourseDropdown(){
+ 
+        $sql = "SELECT * FROM tbl_course";
+        $query = $this->connection->query($sql);
+ 
+        if($query->num_rows > 0){
+            while($row = $query->fetch_assoc()){
+                echo '<option value="'.$row['id'].'">'.$row['course'].'</option>';
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
     public function details($sql){
  
         $query = $this->connection->query($sql);

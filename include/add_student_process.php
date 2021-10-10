@@ -11,6 +11,7 @@ $insert_student = new InsertUserDetails();
 if(isset($_POST['add_student'])){
 
 	$id_number = $user->escape_string($_POST['id_number']);
+	$course = $user->escape_string($_POST['course']);
 
     $check_id_number_student = $user->check_id_number_student($id_number);
  
@@ -19,7 +20,7 @@ if(isset($_POST['add_student'])){
         header('location:../admin/student.php');
 	}
 	else{
-		$add_student = $insert_student->add_student($id_number);
+		$add_student = $insert_student->add_student($id_number, $course);
 	}
 }
 else{

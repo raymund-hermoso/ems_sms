@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2021 at 05:06 PM
+-- Generation Time: Oct 10, 2021 at 03:53 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -38,10 +38,10 @@ CREATE TABLE `tbl_course` (
 --
 
 INSERT INTO `tbl_course` (`id`, `course`, `dept_id`) VALUES
-(1, 'Course 1', 1),
-(2, 'Course 3 - CAF', 5),
-(3, 'Course 4 - CAF', 5),
-(4, 'Course 1 - CBM', 1);
+(5, 'Bachelor of Elementary Education', 2),
+(6, 'Bachelor of Secondary  Education - Science', 2),
+(7, 'Bachelor of Secondary Education- Mathematics', 2),
+(8, 'Bachelor of Science in Information Technology', 3);
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,7 @@ INSERT INTO `tbl_department_head` (`id`, `school_id_number`, `department_id`) VA
 CREATE TABLE `tbl_event` (
   `event_id` int(11) NOT NULL,
   `title` varchar(200) NOT NULL,
-  `event_desc` varchar(200) NOT NULL,
+  `event_desc` varchar(1000) NOT NULL,
   `venue` varchar(200) NOT NULL,
   `date_start` date DEFAULT NULL,
   `date_end` date DEFAULT NULL,
@@ -116,7 +116,10 @@ CREATE TABLE `tbl_event` (
 --
 
 INSERT INTO `tbl_event` (`event_id`, `title`, `event_desc`, `venue`, `date_start`, `date_end`, `time_start`, `time_end`, `status`, `user_id`) VALUES
-(7, 'The title of the Event', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut a', 'Anywhere', '2021-10-08', '2021-10-09', '10:30:00', '17:30:00', '', 45);
+(11, 'Mass', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n\r\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam qua', 'Covered Court', '2021-10-09', '2021-10-09', '07:00:00', '10:00:00', 'approved', 45),
+(12, 'The Conference', 'Lorem Ipsume', 'Covered Court', '2021-10-09', '2021-10-09', '10:00:00', '12:00:00', 'request', 2),
+(13, 'New Protocol in School', 'Lorem Ipsum Dolor sit amet', 'Covered Court', '2021-10-09', '2021-10-09', '10:00:00', '12:00:00', 'approved', 2),
+(14, 'New Event 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam qua', 'Covered Court', '2021-10-10', '2021-10-10', '10:00:00', '11:00:00', 'request', 45);
 
 -- --------------------------------------------------------
 
@@ -184,7 +187,21 @@ INSERT INTO `tbl_log` (`id`, `user_id`, `date`, `log_type`) VALUES
 (47, 2, '2021-10-07 19:46:13', 'login'),
 (48, 45, '2021-10-07 20:46:37', 'login'),
 (49, 45, '2021-10-07 21:06:58', 'login'),
-(50, 2, '2021-10-07 22:31:46', 'login');
+(50, 2, '2021-10-07 22:31:46', 'login'),
+(51, 45, '2021-10-09 07:35:22', 'login'),
+(52, 2, '2021-10-09 09:42:23', 'login'),
+(53, 45, '2021-10-09 09:43:47', 'login'),
+(54, 2, '2021-10-09 09:44:49', 'login'),
+(55, 45, '2021-10-09 19:37:55', 'login'),
+(56, 2, '2021-10-09 19:38:19', 'login'),
+(57, 45, '2021-10-09 19:38:38', 'login'),
+(58, 45, '2021-10-10 09:05:10', 'login'),
+(59, 2, '2021-10-10 15:45:45', 'login'),
+(60, 2, '2021-10-10 19:46:18', 'login'),
+(61, 47, '2021-10-10 19:54:43', 'login'),
+(62, 2, '2021-10-10 19:54:58', 'login'),
+(63, 45, '2021-10-10 20:00:29', 'login'),
+(64, 2, '2021-10-10 20:13:19', 'login');
 
 -- --------------------------------------------------------
 
@@ -194,22 +211,19 @@ INSERT INTO `tbl_log` (`id`, `user_id`, `date`, `log_type`) VALUES
 
 CREATE TABLE `tbl_student` (
   `id` int(11) NOT NULL,
-  `school_id_number` varchar(200) NOT NULL
+  `school_id_number` varchar(200) DEFAULT NULL,
+  `course_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_student`
 --
 
-INSERT INTO `tbl_student` (`id`, `school_id_number`) VALUES
-(1, '21-1240'),
-(2, '21-1241'),
-(3, '21-1242'),
-(4, '21-1243'),
-(5, '21-1244'),
-(6, '21-1245'),
-(13, '21-1246'),
-(15, '12-9637');
+INSERT INTO `tbl_student` (`id`, `school_id_number`, `course_id`) VALUES
+(1, '21-1246', 5),
+(2, '12-9637', 7),
+(3, '21-1245', 8),
+(4, '12-9636', 8);
 
 -- --------------------------------------------------------
 
@@ -224,7 +238,6 @@ CREATE TABLE `tbl_users` (
   `middlename` varchar(200) NOT NULL,
   `lastname` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
-  `course` varchar(200) NOT NULL,
   `mobile_number` varchar(50) NOT NULL,
   `role` varchar(50) NOT NULL,
   `username` varchar(200) NOT NULL,
@@ -235,13 +248,14 @@ CREATE TABLE `tbl_users` (
 -- Dumping data for table `tbl_users`
 --
 
-INSERT INTO `tbl_users` (`user_id`, `id_number`, `firstname`, `middlename`, `lastname`, `email`, `course`, `mobile_number`, `role`, `username`, `password`) VALUES
-(2, '', 'Harry', 'Doe', 'Lim', 'harry_doe@gmail.com', '', '09123456789', 'admin', 'admin', '$2y$10$tWpKFzXEbRoT/fd6811ndOHfg7sZAtAQuXEPCYSxwRgBwWnemkH.m'),
-(3, '', 'Jane', 'Sy', 'Doe', 'jane_doe@gmail.com', '', '09789456123', 'admin', 'admin2', '$2y$10$HEF1lGv2J61ypA048pMsEORv.h7ugUziGzmvX9o848y2WrMgG0kFW'),
-(36, '21-1246', 'Maria', 'Oza', 'Wa', 'maria@gmail.com', '', '0938677896', 'student', 'maria', '$2y$10$9jIfxPsBGJZOCex6SH3TMumsfVsZFNkELcUqfDXgxnTEvS2va8d7G'),
-(37, '12-9637', 'Maria', 'Oz', 'Ozawa', 'mariaoz@gmail.com', 'BSIT', '09123456789', 'student', 'maria1', '$2y$10$o4yXpSgK24UcY4lirh.LVu5tOLlgDxsHMMblrnKqUttTaYvRTNaMy'),
-(43, '21-1245', 'Jay', 'Monted', 'Damian', 'jay@gmail.com', '', '09654852159', 'student', 'jay', '$2y$10$0cLtK8D4ZXj.Gp9tuEDOg.gjF1xnPN4sHYqkNuOIgcFYpDxlrPfqa'),
-(45, '21-4576', 'Jay', 'Monted', 'Damian', 'jaya@gmail.com', '', '09654852159', 'department head', 'jaya', '$2y$10$nON/.Zx10e66ATPa3Woq..J.9wTRDdjA8LHGvYpnD52Hi1IV6gKx6');
+INSERT INTO `tbl_users` (`user_id`, `id_number`, `firstname`, `middlename`, `lastname`, `email`, `mobile_number`, `role`, `username`, `password`) VALUES
+(2, '', 'Harry', 'Doe', 'Lim', 'harry_doe@gmail.com', '09123456789', 'admin', 'admin', '$2y$10$tWpKFzXEbRoT/fd6811ndOHfg7sZAtAQuXEPCYSxwRgBwWnemkH.m'),
+(3, '', 'Jane', 'Sy', 'Doe', 'jane_doe@gmail.com', '09789456123', 'admin', 'admin2', '$2y$10$HEF1lGv2J61ypA048pMsEORv.h7ugUziGzmvX9o848y2WrMgG0kFW'),
+(36, '21-1246', 'Maria', 'Oza', 'Wa', 'maria@gmail.com', '0938677896', 'student', 'maria', '$2y$10$9jIfxPsBGJZOCex6SH3TMumsfVsZFNkELcUqfDXgxnTEvS2va8d7G'),
+(37, '12-9637', 'Maria', 'Oz', 'Ozawa', 'mariaoz@gmail.com', '09123456789', 'student', 'maria1', '$2y$10$o4yXpSgK24UcY4lirh.LVu5tOLlgDxsHMMblrnKqUttTaYvRTNaMy'),
+(43, '21-1245', 'Jay', 'Monted', 'Damian', 'jay@gmail.com', '09654852159', 'student', 'jay', '$2y$10$0cLtK8D4ZXj.Gp9tuEDOg.gjF1xnPN4sHYqkNuOIgcFYpDxlrPfqa'),
+(45, '21-4576', 'Jay', 'Monted', 'Damian', 'jaya@gmail.com', '09654852159', 'department head', 'jaya', '$2y$10$nON/.Zx10e66ATPa3Woq..J.9wTRDdjA8LHGvYpnD52Hi1IV6gKx6'),
+(47, '12-9636', 'Raymund', 'Aloria', 'Hermoso', 'rayhermoso8@mail.com', '09789465124', 'student', 'raymund', '$2y$10$ZTl20bAbNiiPZZndIdZfBOgZuC54fEhFRN88t.2kQpyC3Ga9a2MIi');
 
 --
 -- Indexes for dumped tables
@@ -291,7 +305,8 @@ ALTER TABLE `tbl_log`
 -- Indexes for table `tbl_student`
 --
 ALTER TABLE `tbl_student`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `course_id` (`course_id`);
 
 --
 -- Indexes for table `tbl_users`
@@ -307,7 +322,7 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `tbl_course`
 --
 ALTER TABLE `tbl_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_department`
@@ -325,7 +340,7 @@ ALTER TABLE `tbl_department_head`
 -- AUTO_INCREMENT for table `tbl_event`
 --
 ALTER TABLE `tbl_event`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_faculty`
@@ -337,19 +352,19 @@ ALTER TABLE `tbl_faculty`
 -- AUTO_INCREMENT for table `tbl_log`
 --
 ALTER TABLE `tbl_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `tbl_student`
 --
 ALTER TABLE `tbl_student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- Constraints for dumped tables
@@ -378,6 +393,12 @@ ALTER TABLE `tbl_event`
 --
 ALTER TABLE `tbl_log`
   ADD CONSTRAINT `tbl_log_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_student`
+--
+ALTER TABLE `tbl_student`
+  ADD CONSTRAINT `tbl_student_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `tbl_course` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

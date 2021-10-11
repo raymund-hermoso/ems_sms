@@ -71,7 +71,7 @@
             <div class="modal-body">Select "Okay" below to update the Event.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-success" href="../include/event_process.php?approve_event_id=<?php echo isset($_GET['id']) ? $_GET['id'] : "" ?>">Okay</a>
+                <a class="btn btn-success" href="../include/event_process.php?id=<?php echo isset($_GET['id']) ? $_GET['id'] : "" ?>">Okay</a>
             </div>
         </div>
     </div>

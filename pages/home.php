@@ -16,8 +16,6 @@
 						include '../include/section_2.php';
 						include '../include/section_3.php';
 					?>
-
-
                 </div>
                 <!-- End of Main Content -->
 

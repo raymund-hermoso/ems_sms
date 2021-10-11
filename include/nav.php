@@ -1,3 +1,6 @@
+<?php
+    $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
+?>
 <!-- Topbar -->
 <nav id="navbar_top" class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
     <!-- Container -->
@@ -15,13 +18,13 @@
         </a>
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a href="#home-sec" class="nav-link">Home</a>
+                <a href="<?php if($page == 'home.php'){ echo '#home-sec'; }else{ echo 'home.php'; } ?>" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
-                <a href="#event-sec" class="nav-link">Event</a>
+                <a href="<?php if($page == 'home.php'){ echo '#event-sec'; }else{ echo 'home.php'; } ?>" class="nav-link">Event</a>
             </li>
             <li class="nav-item">
-                <a href="#about-sec" class="nav-link">About</a>
+                <a href="<?php if($page == 'home.php'){ echo '#about-sec'; }else{ echo 'home.php'; } ?>" class="nav-link">About</a>
             </li>
         </ul>
         <!-- Topbar Navbar -->
@@ -188,9 +191,9 @@
                     <?php 
                         if($row['role'] == 'department head'){
                     ?>
-                        <a href="#" class="dropdown-item" data-toggle="modal" data-target="#AddEventModal">
+                        <a href="event.php" class="dropdown-item">
                             <i class="fas fa-calendar fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Request Event
+                            All Event
                         </a>
                     <?php
                         }
@@ -219,7 +222,7 @@
 
 <!-- Request Event Modal-->
 <div class="modal fade" id="AddEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <form class="user" method="POST" action="../include/add_event_process.php">
             <div class="modal-content">
                 <div class="modal-header">

@@ -23,8 +23,7 @@ class FetchEvent extends DbConnection{
                         <td>'.$row['date_end'].' | '.$row['time_end'].'</td>
                         <td>'.$row['venue'].'</td>
                         <td>';
-                            
-                        if($row['status'] == 'request'){echo '<span class="badge badge-warning">';}else if($row['status'] == 'approved'){echo '<span class="badge badge-success">';}else{}
+                        if($row['status'] == 'request'){echo '<span class="badge badge-warning">';}else if($row['status'] == 'approved'){echo '<span class="badge badge-success">';}else if($row['status'] == 'posted'){echo '<span class="badge badge-success">';}else{echo 'badge error';}
                 echo    ucfirst($row['status']).'</span>
                         </td>
                         <td><a href="view-event.php?id='.$row['event_id'].'" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</a></td>
@@ -39,7 +38,7 @@ class FetchEvent extends DbConnection{
     //Events Details
     public function getEventDetails(){
  
-        $sql = "SELECT * FROM tbl_event WHERE status = 'approved' ORDER BY event_id DESC";
+        $sql = "SELECT * FROM tbl_event WHERE status = 'post' ORDER BY event_id DESC";
         $query = $this->connection->query($sql);
  
         if($query->num_rows > 0){
@@ -102,6 +101,34 @@ class FetchEvent extends DbConnection{
         }
     }
 
+    //Events Details Requested
+    public function getEventRequested(){
+
+        $user_id = $_SESSION['user_id'];
+ 
+        $sql = "SELECT * FROM tbl_event WHERE user_id = '$user_id' ORDER BY event_id DESC";
+        $query = $this->connection->query($sql);
+ 
+        if($query->num_rows > 0){
+            while($row = $query->fetch_assoc()){
+                echo '<tr>
+                        <td>'.$row['title'].'</td>
+                        <td>'.$row['venue'].'</td>
+                        <td>';
+                        if($row['status'] == 'request'){echo '<span class="badge badge-warning">';}else if($row['status'] == 'approved'){echo '<span class="badge badge-primary">';}else if($row['status'] == 'post'){echo '<span class="badge badge-success">';}else{echo 'error badge';}
+                echo    ucfirst($row['status']).'</span>
+                        </td>
+                        <td>';
+                        if($row['status'] == 'approved'){echo '<a href="view-event.php?id='.$row['event_id'].'" class="btn btn-primary btn-sm"><i class="fas fa-sticky-note"></i> Post</a> <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-sticky-note"></i> Details</a>';}else{}
+                echo    '</td>
+                    </tr>';
+            }
+        }
+        else{
+            echo 'None';
+        }
+    }
+
     //Event Preview Details
     public function getPreviewEventDetails(){
 
@@ -126,10 +153,10 @@ class FetchEvent extends DbConnection{
                         echo '<a href="#" data-toggle="modal" data-target="#UpdateEventModal" class="btn btn-success btn-user">Approved</a>';
                     }
                     else if($row['status'] == 'approved'){
-                        
+                        echo '<a href="#" data-toggle="modal" data-target="#PostEventModal" class="btn btn-success btn-user">Post</a>';
                     }
                     else{
-                        echo 'error';
+                        
                     }
             echo    '</div>
                     </div>

@@ -81,3 +81,9 @@ input.error {
 .select2-container ul li:hover {
     color: #fff !important;
 }
+
+/* Login */
+
+.bg-login-image {
+    background-image: url(../img/admin_bg.jpg);
+}

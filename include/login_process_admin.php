@@ -23,7 +23,7 @@ if(isset($_POST['login'])){
         header('location:../admin/index.php?username='.$username);
 	}
 	else{
-		if($row['role'] == ''){
+		if($row['role'] !== 'admin'){
 			$_SESSION['message'] = 'Invalid username or password';
 			header('location:../admin/index.php?username='.$username);
 		}

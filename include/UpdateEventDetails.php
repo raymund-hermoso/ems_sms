@@ -9,14 +9,27 @@ class UpdateEventDetails extends DbConnection{
     }
 
 
-    //
-    public function approved_event($id){
-        $sql = "UPDATE tbl_event SET status = 'approved' WHERE event_id = '$id'";
+    //Approved Event
+    public function approved_event($approved_event_id){
+        $sql = "UPDATE tbl_event SET status = 'approved' WHERE event_id = '$approved_event_id'";
         $query = $this->connection->query($sql);
 
         if ($query === TRUE) {
             $_SESSION['message'] = 'Event was Approved';
-            header('location:../admin/view-event.php?id='.$id);
+            header('location:../admin/view-event.php?id='.$approved_event_id);
+        } else {
+            return false;
+        }
+    }
+
+    //Post Event
+    public function post_event($post_event_id){
+        $sql = "UPDATE tbl_event SET status = 'post' WHERE event_id = '$post_event_id'";
+        $query = $this->connection->query($sql);
+
+        if ($query === TRUE) {
+            $_SESSION['message'] = 'Event was Posted';
+            header('location:../pages/view-event.php?id='.$post_event_id);
         } else {
             return false;
         }

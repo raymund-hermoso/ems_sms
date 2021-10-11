@@ -24,7 +24,7 @@ class InsertEventDetails extends DbConnection{
             }
             else{
                 $_SESSION['message'] = 'Event Created';
-                header('location:../pages/home.php');
+                header('location:../pages/event.php');
             }
             
         } else {

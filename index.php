@@ -1,5 +1,5 @@
 <?php
-	include 'include/auth.php';
+	include 'include/index_auth.php';
 	include 'include/header.php';
 ?>
 

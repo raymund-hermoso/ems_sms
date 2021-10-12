@@ -1,5 +1,5 @@
 <?php
-	include '../include/session_auth.php';
+	include '../include/session_user_auth.php';
 	include '../include/header.php';
 	include '../include/FetchEvent.php';
 ?>
@@ -16,7 +16,7 @@
 					
 							<!-- DataTales Example -->
 							<div class="card shadow mb-4">
-								<div class="card-header py-3 d-sm-flex align-items-center justify-content-between mb-4">
+								<div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
 									<h6 class="m-0 font-weight-bold text-primary">List</h6>
 									<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#AddEventModal">
 										Request Event

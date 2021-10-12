@@ -1,5 +1,5 @@
 <?php 
-    include_once '../include/FetchDepartment.php';
+    include_once '../../include/FetchDepartment.php';
     $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
 ?>
 <!-- Sidebar -->

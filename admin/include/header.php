@@ -1,6 +1,6 @@
 <?php 
 	if(isset($_SESSION['user_id'])){
-		include_once('../include/FetchUser.php');
+		include_once('../../include/FetchUser.php');
 		$user = new FetchUser();
 		
 		//fetch user data

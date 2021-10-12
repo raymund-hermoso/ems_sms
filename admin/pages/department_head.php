@@ -1,13 +1,13 @@
 <?php
-    include_once('../include/session_auth.php');
-    include_once('../include/FetchUser.php');
-    include_once('../include/FetchDepartment.php');
-    include_once('include/header.php');
+    include_once('../../include/session_admin_auth.php');
+    include_once('../../include/FetchUser.php');
+    include_once('../../include/FetchDepartment.php');
+    include_once('../include/header.php');
 ?>
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-    <?php include 'include/sidebar.php'; ?>
+    <?php include '../include/sidebar.php'; ?>
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -15,7 +15,7 @@
         <!-- Main Content -->
         <div id="content">
 
-            <?php include 'include/nav.php'; ?>
+            <?php include '../include/nav.php'; ?>
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -89,7 +89,7 @@
         </div>
         <!-- End of Main Content -->
 
-        <?php include 'include/footer_admin.php'; ?>
+        <?php include '../include/footer_admin.php'; ?>
 
     </div>
     <!-- End of Content Wrapper -->
@@ -132,5 +132,5 @@
 </div>
 
 <?php
-    include 'include/footer.php';
+    include '../include/footer.php';
 ?>

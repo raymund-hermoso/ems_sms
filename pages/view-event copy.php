@@ -1,5 +1,5 @@
 <?php
-    include_once('../include/session_auth.php');
+    include_once('../include/session_user_auth.php');
     include_once('../include/FetchEvent.php');
     include_once('include/header.php');
 ?>

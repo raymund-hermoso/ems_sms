@@ -8,7 +8,7 @@ class CheckUserDetails extends DbConnection{
         parent::__construct();
     }
 
-    function invalidUsername($username){
+    public function invalidUsername($username){
 		$result;
 		if(!preg_match("/^[a-zA-Z0-9]*$/", $username)){
 			$result = true;
@@ -18,7 +18,7 @@ class CheckUserDetails extends DbConnection{
 		}
 		return $result;
 	}
-	function invalidEmail($email){
+	public function invalidEmail($email){
 		$result;
 		if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
 			$result = true;
@@ -29,7 +29,7 @@ class CheckUserDetails extends DbConnection{
 		return $result;
 	}
 	
-	function pwdMatch($password, $pwdrepeat){
+	public function pwdMatch($password, $pwdrepeat){
 		$result;
 		if($password !== $pwdrepeat){
 			$result = true;
@@ -155,30 +155,6 @@ class CheckUserDetails extends DbConnection{
             return false;
         }
     }
-    
-
-    //Check Password
-    // public function check_password($password){
- 
-    //     $sql = "SELECT * FROM tbl_users";
-    //     $query = $this->connection->query($sql);
-
-    //     $hashedPwd = array();
-            
-    //     while($row = mysqli_fetch_assoc($query)){
-
-    //         $hashedPwd[] = $row['password'];
-
-    //         $checkPwd = password_verify($password, $hashedPwd);
-
-    //         if($checkPwd == 1){
-    //             return $row['id'];
-    //         }
-    //         else{
-    //             return false;
-    //         }
-    //     }
-    // }
  
     public function details($sql){
  

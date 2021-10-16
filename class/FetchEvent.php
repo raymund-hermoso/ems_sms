@@ -9,7 +9,7 @@ class FetchEvent extends DbConnection{
     }
 
 
-    //Events
+    //Events (Admin)
     public function getEvents(){
  
         $sql = "SELECT * FROM tbl_event";
@@ -17,16 +17,33 @@ class FetchEvent extends DbConnection{
  
         if($query->num_rows > 0){
             while($row = $query->fetch_assoc()){
+        
+                $date_start = date('F j, Y', strtotime($row['date_start']));
+                $time_start = date('g:i a', strtotime($row['time_start']));
+                $date_end = date('F j, Y', strtotime($row['date_end']));
+                $time_end = date('g:i a', strtotime($row['time_end']));
+
                 echo '<tr>
                         <td>'.$row['title'].'</td>
-                        <td>'.$row['date_start'].' | '.$row['time_start'].'</td>
-                        <td>'.$row['date_end'].' | '.$row['time_end'].'</td>
+                        <td>'.$date_start.' | '.$time_start.'</td>
+                        <td>'.$date_end.' | '.$time_end.'</td>
                         <td>'.$row['venue'].'</td>
                         <td>';
-                        if($row['status'] == 'request'){echo '<span class="badge badge-warning">';}else if($row['status'] == 'approved'){echo '<span class="badge badge-success">';}else if($row['status'] == 'posted'){echo '<span class="badge badge-success">';}else{echo 'badge error';}
+                        if($row['status'] == 'request'){
+                            echo '<span class="badge badge-warning">';
+                        }
+                        else if($row['status'] == 'post'){
+                            echo '<span class="badge badge-success">';
+                        }
+                        else if($row['status'] == 'approved'){
+                            echo '<span class="badge badge-primary">';
+                        }
+                        else{
+                            echo 'error badge';
+                        }
                 echo    ucfirst($row['status']).'</span>
                         </td>
-                        <td><a href="view-event.php?id='.$row['event_id'].'" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</a></td>
+                        <td><a href="view-event.php?id='.$row['event_id'].'" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> Preview</a></td>
                     </tr>';
             }
         }
@@ -115,11 +132,26 @@ class FetchEvent extends DbConnection{
                         <td>'.$row['title'].'</td>
                         <td>'.$row['venue'].'</td>
                         <td>';
-                        if($row['status'] == 'request'){echo '<span class="badge badge-warning">';}else if($row['status'] == 'approved'){echo '<span class="badge badge-primary">';}else if($row['status'] == 'post'){echo '<span class="badge badge-success">';}else{echo 'error badge';}
+                        if($row['status'] == 'request'){
+                            echo '<span class="badge badge-warning">';
+                        }
+                        else if($row['status'] == 'post'){
+                            echo '<span class="badge badge-success">';
+                        }
+                        else if($row['status'] == 'approved'){
+                            echo '<span class="badge badge-primary">';
+                        }
+                        else{
+                            echo 'error badge';
+                        }
                 echo    ucfirst($row['status']).'</span>
                         </td>
                         <td>';
-                        if($row['status'] == 'approved'){echo '<a href="view-event.php?id='.$row['event_id'].'" class="btn btn-primary btn-sm"><i class="fas fa-sticky-note"></i> Post</a> <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-sticky-note"></i> Details</a>';}else{}
+                        if($row['status'] == 'approved'){
+                            echo '<a href="view-event.php?id='.$row['event_id'].'" class="btn btn-primary btn-sm"><i class="fas fa-sticky-note"></i> Post</a> <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-sticky-note"></i> Details</a>';
+                        }else{
+
+                        }
                 echo    '</td>
                     </tr>';
             }

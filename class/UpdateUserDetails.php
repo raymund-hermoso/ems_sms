@@ -8,8 +8,8 @@ class UpdateUserDetails extends DbConnection{
         parent::__construct();
     }
 
-    public function update_role_student($school_id_number){
-        $sql = "UPDATE tbl_users SET role = 'student' WHERE id_number = '$school_id_number'";
+    public function update_role_student($school_id_number, $role){
+        $sql = "UPDATE tbl_users SET role = '$role' WHERE id_number = '$school_id_number'";
         $query = $this->connection->query($sql);
 
         if ($query === TRUE) {
@@ -20,8 +20,8 @@ class UpdateUserDetails extends DbConnection{
         }
     }
 
-    public function update_role_department_head($school_id_number){
-        $sql = "UPDATE tbl_users SET role = 'department head' WHERE id_number = '$school_id_number'";
+    public function update_role_department_head($school_id_number, $role){
+        $sql = "UPDATE tbl_users SET role = '$role' WHERE id_number = '$school_id_number'";
         $query = $this->connection->query($sql);
 
         if ($query === TRUE) {

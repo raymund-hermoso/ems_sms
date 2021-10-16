@@ -1,6 +1,6 @@
 <?php 
 	if(isset($_SESSION['user_id'])){
-		include_once('../../include/FetchUser.php');
+		include_once('../../class/FetchUser.php');
 		$user = new FetchUser();
 		
 		//fetch user data
@@ -32,27 +32,36 @@
                 <!-- Custom styles for this template-->
                 <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
 
+				<!-- Custom styles for this page -->
+				<link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
 				<!-- Custom styles ems.css-->
-                <link href="../css/ems.css" rel="stylesheet">
+                <link href="../../css/ems.css" rel="stylesheet">
+
+				<!-- Select2 -->
+				<link rel="stylesheet" href="../../css/select2.min.css">
+				<link rel="stylesheet" href="../../css/select2-bootstrap4.min.css">
 		<?php	
 			}
 			else{
 		?>
-                <!-- Custom fonts for this template-->
-                <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
-                <!-- Custom styles for this template-->
-                <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+				<!-- Custom fonts for this template-->
+				<link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+				<!-- Custom styles for this template-->
+				<link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
 				<!-- Custom styles for this page -->
 				<link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 				<!-- Custom styles ems.css-->
-                <link href="../css/ems.css" rel="stylesheet">
+				<link href="../css/ems.css" rel="stylesheet">
 
 				<!-- Select2 -->
 				<link rel="stylesheet" href="../css/select2.min.css">
 				<link rel="stylesheet" href="../css/select2-bootstrap4.min.css">
+
 		<?php
 			}
 		?>

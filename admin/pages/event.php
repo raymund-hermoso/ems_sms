@@ -1,6 +1,6 @@
 <?php
     include_once('../../include/session_admin_auth.php');
-    include_once('../../include/FetchEvent.php');
+    include_once('../../class/FetchEvent.php');
     include_once('../include/header.php');
 ?>
 <!-- Page Wrapper -->
@@ -97,7 +97,7 @@
 <!-- Add Event Modal-->
 <div class="modal fade" id="AddEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
-        <form class="user" method="POST" action="../include/add_event_process.php">
+        <form class="user" method="POST" action="../../include/add_event_process.php">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Request Event</h5>

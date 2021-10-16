@@ -2,8 +2,8 @@
 //start session
 session_start();
  
-include_once('InsertUserDetails.php');
-include_once('CheckUserDetails.php');
+include_once('../class/InsertUserDetails.php');
+include_once('../class/CheckUserDetails.php');
 
 $log = new InsertUserDetails(); 
 $user = new CheckUserDetails();
@@ -23,7 +23,7 @@ if(isset($_POST['login'])){
         header('location:../admin/index.php?username='.$username);
 	}
 	else{
-		if($row['role'] !== 'admin'){
+		if($row['role'] != 1){
 			$_SESSION['message'] = 'Invalid username or password';
 			header('location:../admin/index.php?username='.$username);
 		}

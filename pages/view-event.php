@@ -1,7 +1,7 @@
 <?php
 	include '../include/session_user_auth.php';
 	include '../include/header.php';
-	include '../include/FetchEvent.php';
+	include '../class/FetchEvent.php';
 ?>
 	<div id="wrapper">
         <!-- Content Wrapper -->

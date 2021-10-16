@@ -1,5 +1,5 @@
 <?php 
-    include_once 'FetchEvent.php';
+    include_once '../class/FetchEvent.php';
 ?>
 <section id="event-sec" class="section">
     <div class="container">

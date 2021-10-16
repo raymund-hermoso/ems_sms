@@ -18,9 +18,9 @@ class InsertEventDetails extends DbConnection{
         $query = $this->connection->query($sql);
 
         if ($query === TRUE) {
-            if($_SESSION['role'] == 'admin'){
+            if($_SESSION['role'] == 1){
                 $_SESSION['message'] = 'Event Created';
-                header('location:../admin/event.php');
+                header('location:../admin/pages/event.php');
             }
             else{
                 $_SESSION['message'] = 'Event Created';

@@ -2,7 +2,7 @@
 //start session
 session_start();
 
-include_once('UpdateEventDetails.php');
+include_once('../class/UpdateEventDetails.php');
 
 $event = new UpdateEventDetails();
  

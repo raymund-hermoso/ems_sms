@@ -1,7 +1,7 @@
 <?php
     include_once('../../include/session_admin_auth.php');
-    include_once('../../include/FetchUser.php');
-    include_once('../../include/FetchDepartment.php');
+    include_once('../../class/FetchUser.php');
+    include_once('../../class/FetchDepartment.php');
     include_once('../include/header.php');
 ?>
 <!-- Page Wrapper -->
@@ -100,7 +100,7 @@
 <!-- Add Department Head Modal-->
 <div class="modal fade" id="AddDeptHeadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form class="user" method="POST" action="../include/add_department_head_process.php">
+        <form class="user" method="POST" action="../../include/add_department_head_process.php">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add Department Head</h5>

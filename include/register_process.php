@@ -2,9 +2,9 @@
 //start session
 session_start();
  
-include_once('CheckUserDetails.php');
-include_once('InsertUserDetails.php');
-include_once('UpdateUserDetails.php');
+include_once('../class/CheckUserDetails.php');
+include_once('../class/InsertUserDetails.php');
+include_once('../class/UpdateUserDetails.php');
 
 $user = new CheckUserDetails();
 $insert_user = new InsertUserDetails();
@@ -34,7 +34,7 @@ if(isset($_POST['register'])){
 	// $check_password = $user->check_password($password);
 
 	if($check_id_number){
-		$_SESSION['message'] = 'ID Number already exists';
+		$_SESSION['message'] = 'ID Number already registered';
     	header('location:../register.php?id_no='.$id_number.'&fname='.$firstname.'&mname='.$middlename.'&lname='.$lastname.'&email='.$email.'&course='.$course.'&mobile_number='.$mobile_number.'&username='.$username);
 	}
 	else if($validate_email !== false){
@@ -59,7 +59,8 @@ if(isset($_POST['register'])){
 	}
 	else if($school_id_number_student !== false){
 		if($insert_user->add_user($id_number, $firstname, $middlename, $lastname, $email, $mobile_number, $username, $password)){
-			$update_user->update_role_student($school_id_number_student);
+			$role = 2;
+			$update_user->update_role_student($school_id_number_student, $role);
 		}
 		else{
 			echo 'error2';
@@ -67,16 +68,13 @@ if(isset($_POST['register'])){
 	}
 	else if($school_id_number_dh !== false){
 		if($insert_user->add_user($id_number, $firstname, $middlename, $lastname, $email, $mobile_number, $username, $password)){
-			$update_user->update_role_department_head($school_id_number_dh);
+			$role = 3;
+			$update_user->update_role_department_head($school_id_number_dh, $role);
 		}
 		else{
 			echo 'error3';
 		}
 	}
-	// else if($check_password){
-	// 	$_SESSION['message'] = 'Password already exists';
-    // 	header('location:../register.php?id_no='.$id_number.'&fname='.$firstname.'&mname='.$middlename.'&lname='.$lastname.'&email='.$email.'&course='.$course.'&mobile_number='.$mobile_number.'&username='.$username);
-	// }
 	else{
 		$_SESSION['message'] = 'Not Registered ID Number';
     	header('location:../register.php?id_no='.$id_number.'&fname='.$firstname.'&mname='.$middlename.'&lname='.$lastname.'&email='.$email.'&course='.$course.'&mobile_number='.$mobile_number.'&username='.$username);

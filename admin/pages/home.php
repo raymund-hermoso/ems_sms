@@ -1,6 +1,6 @@
 <?php
     include_once('../../include/session_admin_auth.php');
-    include_once('../../include/FetchUser.php');
+    include_once('../../class/FetchUser.php');
     include_once('../include/header.php');
 ?>
 <!-- Page Wrapper -->

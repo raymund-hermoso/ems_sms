@@ -1,6 +1,6 @@
 <?php
     include_once('../../include/session_admin_auth.php');
-    include_once('../../include/FetchEvent.php');
+    include_once('../../class/FetchEvent.php');
     include_once('../include/header.php');
 ?>
 <!-- Page Wrapper -->
@@ -71,7 +71,7 @@
             <div class="modal-body">Select "Okay" below to update the Event.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-success" href="../include/event_process.php?approve_event_id=<?php echo isset($_GET['id']) ? $_GET['id'] : "" ?>">Okay</a>
+                <a class="btn btn-success" href="../../include/event_process.php?approve_event_id=<?php echo isset($_GET['id']) ? $_GET['id'] : "" ?>">Okay</a>
             </div>
         </div>
     </div>

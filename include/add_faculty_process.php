@@ -2,8 +2,8 @@
 //start session
 session_start();
 
-include_once('CheckUserDetails.php');
-include_once('InsertUserDetails.php');
+include_once('../class/CheckUserDetails.php');
+include_once('../class/InsertUserDetails.php');
 
 $user = new CheckUserDetails();
 $insert_faculty = new InsertUserDetails();
@@ -16,7 +16,7 @@ if(isset($_POST['add_faculty'])){
  
 	if($check_id_number_faculty){
 		$_SESSION['message'] = 'ID Number Already Exists';
-        header('location:../admin/faculty.php');
+        header('location:../admin/pages/faculty.php');
 	}
 	else{
 		$add_faculty = $insert_faculty->add_faculty($id_number);
@@ -24,5 +24,5 @@ if(isset($_POST['add_faculty'])){
 }
 else{
 	$_SESSION['message'] = 'Error';
-	header('location:../admin/faculty.php');
+	header('location:../admin/pages/faculty.php');
 }

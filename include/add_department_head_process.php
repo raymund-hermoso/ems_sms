@@ -2,8 +2,8 @@
 //start session
 session_start();
 
-include_once('CheckUserDetails.php');
-include_once('InsertUserDetails.php');
+include_once('../class/CheckUserDetails.php');
+include_once('../class/InsertUserDetails.php');
 
 $user = new CheckUserDetails();
 $insert_dh = new InsertUserDetails();
@@ -17,7 +17,7 @@ if(isset($_POST['add_dh'])){
  
 	if($check_id_number_dh){
 		$_SESSION['message'] = 'ID Number Already Exists';
-        header('location:../admin/department_head.php');
+        header('location:../admin/pages/department_head.php');
 	}
 	else{
 		$add_dh = $insert_dh->add_dh($id_number, $department);

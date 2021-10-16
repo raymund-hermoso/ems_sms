@@ -186,10 +186,10 @@
                     aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="#">
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                        <?php echo ucwords(strtolower($row['role'])); ?>
+                        <?php echo ucwords(strtolower($row['role_desc'])); ?>
                     </a>
                     <?php 
-                        if($row['role'] == 'department head'){
+                        if($row['role'] == 3){
                     ?>
                         <a href="event.php" class="dropdown-item">
                             <i class="fas fa-calendar fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -240,10 +240,23 @@
                         <label>Description</label>
                         <textarea name="description" class="form-control"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label>Venue</label>
-                        <input type="text" class="form-control form-control-user" name="venue" required>
+
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label>Venue</label>
+                            <input type="text" class="form-control form-control-user" name="venue" required>
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label>Who to invite?</label>
+                            <select class="form-control form-control-user">
+                                <option>Department Head</option>
+                                <option>Student</option>
+                                <option>All</option>
+                            </select>
+                        </div>
                     </div>
+
+                    <hr>
                     
                     <div class="form-group row">
                         <div class="col-sm-3 mb-3 mb-sm-0">

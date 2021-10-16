@@ -1,10 +1,10 @@
 <?php 
 	if(isset($_SESSION['user_id'])){
-		include_once('FetchUser.php');
+		include_once('../class/FetchUser.php');
 		$user = new FetchUser();
 		
 		//fetch user data
-		$sql = "SELECT * FROM tbl_users WHERE user_id = '".$_SESSION['user_id']."'";
+		$sql = "SELECT a.*, b.* FROM tbl_users AS a LEFT JOIN tbl_role AS b ON a.role = b.id WHERE a.user_id = '".$_SESSION['user_id']."'";
 		$row = $user->details($sql);
 	}
 ?>

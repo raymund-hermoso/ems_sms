@@ -25,57 +25,37 @@
 
         <?php 
             if (strpos($_SERVER['REQUEST_URI'], "pages") !== false){
-        ?>
-                <!-- Bootstrap core JavaScript-->
-                <script src="../../vendor/jquery/jquery.min.js"></script>
-                <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-                <!-- Core plugin JavaScript-->
-                <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
-
-                <!-- Custom scripts for all pages-->
-                <script src="../../js/sb-admin-2.min.js"></script>
-                
-                <script src="../../js/moment.min.js"></script>
-
-                <!-- date_time -->
-                <script src="../../js/date_time.js"></script>
-
-
-        <?php	
-            }
-            else{
 
                 $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
 
                 if($page == 'event.php'){
         ?>
                     <!-- date_time -->
-                    <script src="../js/date_time.js"></script>
+                    <script src="../../js/date_time.js"></script>
         <?php 
                 }
         ?>
                 <!-- Bootstrap core JavaScript-->
-                <script src="../vendor/jquery/jquery.min.js"></script>
-                <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                <script src="../../vendor/jquery/jquery.min.js"></script>
+                <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
                 <!-- Select2 -->
-                <script src="../js/select2.full.min.js"></script>
+                <script src="../../js/select2.full.min.js"></script>
 
                 <!-- Core plugin JavaScript-->
-                <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+                <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
                 <!-- Custom scripts for all pages-->
-                <script src="../js/sb-admin-2.min.js"></script>
+                <script src="../../js/sb-admin-2.min.js"></script>
 
                 <!-- Page level plugins -->
-                <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
-                <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+                <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
+                <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
                 <!-- Page level custom scripts -->
-                <script src="../js/demo/datatables-demo.js"></script>
+                <script src="../../js/demo/datatables-demo.js"></script>
                 
-                <script src="../js/moment.min.js"></script>
+                <script src="../../js/moment.min.js"></script>
 
                 <script>
                     $(function () {
@@ -86,7 +66,8 @@
                     })
                 </script>
 
-        <?php
+
+        <?php	
             }
         ?>
 

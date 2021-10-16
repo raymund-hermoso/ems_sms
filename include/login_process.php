@@ -4,8 +4,8 @@ session_start();
 
 date_default_timezone_set("Asia/Manila");
  
-include_once('InsertUserDetails.php');
-include_once('CheckUserDetails.php');
+include_once('../class/InsertUserDetails.php');
+include_once('../class/CheckUserDetails.php');
 
 $user = new CheckUserDetails();
 $log = new InsertUserDetails(); 
@@ -25,7 +25,7 @@ if(isset($_POST['login'])){
         header('location:../index.php?username='.$username);
 	}
 	else{
-		if($row['role'] == 'admin'){
+		if($row['role'] == 1){
 			$_SESSION['message'] = 'Invalid username or password';
 			header('location:../index.php?username='.$username);
 		}

@@ -1,6 +1,6 @@
 <?php
     include_once('../../include/session_admin_auth.php');
-    include_once('../../include/FetchCourse.php');
+    include_once('../../class/FetchCourse.php');
     include_once('../include/header.php');
 ?>
 <!-- Page Wrapper -->
@@ -94,7 +94,7 @@
 <!-- Add Course Modal-->
 <div class="modal fade" id="AddCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form class="user" method="POST" action="../include/add_course_process.php">
+        <form class="user" method="POST" action="../../include/add_course_process.php">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add Course</h5>

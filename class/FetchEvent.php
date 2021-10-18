@@ -157,7 +157,7 @@ class FetchEvent extends DbConnection{
             }
         }
         else{
-            echo 'None';
+            // echo 'None';
         }
     }
 
@@ -205,15 +205,6 @@ class FetchEvent extends DbConnection{
                     </div>
                 </div>';
         }
-    }
-
-    public function details($sql){
- 
-        $query = $this->connection->query($sql);
- 
-        $row = $query->fetch_array();
- 
-        return $row;       
     }
  
     public function escape_string($value){

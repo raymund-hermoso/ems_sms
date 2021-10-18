@@ -155,15 +155,7 @@ class CheckUserDetails extends DbConnection{
             return false;
         }
     }
- 
-    public function details($sql){
- 
-        $query = $this->connection->query($sql);
- 
-        $row = $query->fetch_array();
- 
-        return $row;       
-    }
+
  
     public function escape_string($value){
  

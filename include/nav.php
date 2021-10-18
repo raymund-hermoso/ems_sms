@@ -1,5 +1,7 @@
 <?php
     $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
+
+    include_once '../class/FetchRole.php';
 ?>
 <!-- Topbar -->
 <nav id="navbar_top" class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -249,9 +251,10 @@
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label>Who to invite?</label>
                             <select class="form-control form-control-user">
-                                <option>Department Head</option>
-                                <option>Student</option>
-                                <option>All</option>
+                                <?php 
+                                    $role = new FetchRole();
+                                    $role->getRole();
+                                ?>
                             </select>
                         </div>
                     </div>

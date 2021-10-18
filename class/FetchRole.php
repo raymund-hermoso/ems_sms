@@ -1,22 +1,24 @@
 <?php
 include_once('DbConnection.php');
  
-class CheckCourseDetails extends DbConnection{
+class FetchRole extends DbConnection{
  
     public function __construct(){
  
         parent::__construct();
     }
+
+
+    //Role
+    public function getRole(){
  
-    //Check Course
-    public function check_course_name($course){
- 
-        $sql = "SELECT * FROM tbl_course WHERE course = '$course'";
+        $sql = "SELECT * FROM tbl_role";
         $query = $this->connection->query($sql);
  
         if($query->num_rows > 0){
-            $row = $query->fetch_array();
-            return $row['id'];
+            while($row = $query->fetch_assoc()){
+                echo '<option value="'.$row['id'].'">'.ucfirst($row['role_desc']).'</option>';
+            }
         }
         else{
             return false;

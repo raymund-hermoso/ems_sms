@@ -6,34 +6,14 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="event.php">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
         <div class="sidebar-brand-text mx-3">EMS | Admin </div>
     </a>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
-
-    <!-- Nav Item - Dashboard -->
-    <?php 
-    if($page == 'home.php'){
-    ?>
-    <li class="nav-item active">
-    <?php
-    }
-    else{
-    ?>
-    <li class="nav-item">
-    <?php
-    }
-    ?>
-        <a class="nav-link" href="home.php">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span>
-        </a>
-    </li>
+   
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -71,7 +51,7 @@
 
     <!-- Nav Item - Pages Collapse Menu - Users -->
     <?php 
-    if($page == 'student.php' || $page == 'department_head.php' || $page == 'faculty.php'){
+    if($page == 'student.php' || $page == 'department_head.php' || $page == 'faculty.php' || $page == 'update_user.php'){
     ?>
     <li class="nav-item active">
     <?php

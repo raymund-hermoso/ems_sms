@@ -9,12 +9,12 @@ class InsertEventDetails extends DbConnection{
     }
 
 
-    //
+    //Add Event
     public function add_event($title, $description, $venue, $date_start, $date_end, $time_start, $time_end){
         
         $user_id = $_SESSION['user_id'];
 
-        $sql = "INSERT INTO tbl_event (title, event_desc, venue, date_start, date_end, time_start, time_end, status, user_id) VALUES ('$title', '$description', '$venue', '$date_start', '$date_end', '$time_start', '$time_end', 'request', '$user_id')";
+        $sql = "INSERT INTO tbl_event (title, event_desc, venue, date_start, date_end, time_start, time_end, status, user_id, invitee, event_type) VALUES ('$title', '$description', '$venue', '$date_start', '$date_end', '$time_start', '$time_end', 'posted', '$user_id', 5, 1)";
         $query = $this->connection->query($sql);
 
         if ($query === TRUE) {
@@ -28,6 +28,30 @@ class InsertEventDetails extends DbConnection{
             }
             
         } else {
+            return false;
+        }
+    }
+
+    //Add Event Request
+    public function add_event_request($title, $description, $venue, $invited_department, $invitee, $date_start, $date_end, $time_start, $time_end){
+        
+        $user_id = $_SESSION['user_id'];
+
+        $sql = "INSERT INTO tbl_event (title, event_desc, venue, invited_department, invitee, date_start, date_end, time_start, time_end, status, user_id, event_type) VALUES ('$title', '$description', '$venue', '$invited_department', '$invitee', '$date_start', '$date_end', '$time_start', '$time_end', 'request', '$user_id', 2)";
+        $query = $this->connection->query($sql);
+
+        if ($query === TRUE) {
+            if($_SESSION['role'] == 1){
+                $_SESSION['message'] = 'Event Created';
+                header('location:../admin/pages/event.php');
+            }
+            else{
+                $_SESSION['message'] = 'Event Created';
+                header('location:../pages/event.php');
+            }
+            
+        } else {
+            echo $this->connection->error;
             return false;
         }
     }

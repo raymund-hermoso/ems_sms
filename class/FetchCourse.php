@@ -45,6 +45,42 @@ class FetchCourse extends DbConnection{
             return false;
         }
     }
+
+    //Course Dropdown
+    public function getCourseDropdown_DH(){
+
+        $id_number = $_SESSION['id_number'];
+ 
+        $sql = "SELECT a.*, b.* FROM tbl_department_head AS a LEFT JOIN tbl_course AS b ON a.department_id = b.dept_id WHERE a.school_id_number = '$id_number'";
+        $query = $this->connection->query($sql);
+ 
+        if($query->num_rows > 0){
+            while($row = $query->fetch_assoc()){
+                echo '<option value="'.$row['id'].'">'.$row['course'].'</option>';
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
+    //Department Dropdown
+    public function getDepartmentDropdown_DH(){
+
+        $id_number = $_SESSION['id_number'];
+ 
+        $sql = "SELECT * FROM tbl_department";
+        $query = $this->connection->query($sql);
+ 
+        if($query->num_rows > 0){
+            while($row = $query->fetch_assoc()){
+                echo '<option value="'.$row['id'].'">'.$row['department_name'].'</option>';
+            }
+        }
+        else{
+            return false;
+        }
+    }
  
     public function escape_string($value){
  

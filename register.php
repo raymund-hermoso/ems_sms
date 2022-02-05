@@ -30,28 +30,28 @@
                             <form class="user" method="POST" action="include/register_process.php">
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user"
-                                        placeholder="ID Number" value="<?php if(isset($_GET['id_no']) ? $_GET['id_no'] : ''){echo $_GET['id_no'];} ?>" name="id_no" required>
+                                        placeholder="ID Number" value="<?php echo isset($_GET['id_no']) ? $_GET['id_no'] : ""; ?>" name="id_no" required>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user"
-                                        placeholder="Firstname" value="<?php if(isset($_GET['fname']) ? $_GET['fname'] : ''){echo $_GET['fname'];} ?>" name="fname" required>
+                                        placeholder="Firstname" value="<?php echo isset($_GET['fname']) ? $_GET['fname'] : ""; ?>" name="fname" required>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user"
-                                        placeholder="Middlename" value="<?php if(isset($_GET['mname']) ? $_GET['mname'] : ''){echo $_GET['mname'];} ?>" name="mname" required>
+                                        placeholder="Middlename" value="<?php echo isset($_GET['mname']) ? $_GET['mname'] : ""; ?>" name="mname" required>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user"
-                                        placeholder="Lastname" value="<?php if(isset($_GET['lname']) ? $_GET['lname'] : ''){echo $_GET['lname'];} ?>" name="lname" required>
+                                        placeholder="Lastname" value="<?php echo isset($_GET['lname']) ? $_GET['lname'] : ""; ?>" name="lname" required>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="email" class="form-control form-control-user"
-                                            placeholder="Email Address" value="<?php if(isset($_GET['email']) ? $_GET['email'] : ''){echo $_GET['email'];} ?>" name="email" required>
+                                            placeholder="Email Address" value="<?php echo isset($_GET['email']) ? $_GET['email'] : ""; ?>" name="email" required>
                                     </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user"
-                                            placeholder="Mobile Number" value="<?php if(isset($_GET['mobile_number']) ? $_GET['mobile_number'] : ''){echo $_GET['mobile_number'];} ?>" name="mobile_number" required>
+                                            placeholder="Mobile Number" value="<?php echo isset($_GET['mobile_number']) ? $_GET['mobile_number'] : ""; ?>" name="mobile_number" required>
                                     </div>
                                 </div>
                                 <div class="form-group">

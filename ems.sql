@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2021 at 04:50 PM
+-- Generation Time: Feb 05, 2022 at 03:31 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -41,7 +41,9 @@ INSERT INTO `tbl_course` (`id`, `course`, `dept_id`) VALUES
 (5, 'Bachelor of Elementary Education', 2),
 (6, 'Bachelor of Secondary  Education - Science', 2),
 (7, 'Bachelor of Secondary Education- Mathematics', 2),
-(8, 'Bachelor of Science in Information Technology', 3);
+(8, 'Bachelor of Science in Information Technology', 3),
+(9, 'Bachelor of Science in Information System', 3),
+(10, 'BSIS', 3);
 
 -- --------------------------------------------------------
 
@@ -110,16 +112,20 @@ CREATE TABLE `tbl_event` (
   `status` varchar(200) NOT NULL,
   `date_posted` date DEFAULT NULL,
   `time_posted` time DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `invited_department` int(11) DEFAULT NULL,
+  `invitee` int(11) DEFAULT NULL,
+  `event_type` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_event`
 --
 
-INSERT INTO `tbl_event` (`event_id`, `title`, `event_desc`, `venue`, `date_start`, `date_end`, `time_start`, `time_end`, `status`, `date_posted`, `time_posted`, `user_id`) VALUES
-(12, 'The Conference', 'Lorem Ipsume', 'Covered Court', '2021-10-09', '2021-10-09', '10:00:00', '12:00:00', 'request', NULL, NULL, 2),
-(13, 'New Protocol in School', 'Lorem Ipsum Dolor sit amet', 'Covered Court', '2021-10-09', '2021-10-09', '10:00:00', '12:00:00', 'approved', NULL, NULL, 2);
+INSERT INTO `tbl_event` (`event_id`, `title`, `event_desc`, `venue`, `date_start`, `date_end`, `time_start`, `time_end`, `status`, `date_posted`, `time_posted`, `user_id`, `invited_department`, `invitee`, `event_type`) VALUES
+(35, 'The first event', 'Lorem', 'Covered Court', '2022-02-11', '2022-02-11', '10:00:00', '12:00:00', 'posted', '2022-02-05', '02:23:32', 61, 2, 5, '2'),
+(36, 'My Fourth Event', 'Lorem', 'Covered Court', '2022-02-14', '2022-02-14', '10:00:00', '12:00:00', 'posted', '2022-02-05', '02:16:42', 61, 1, 1, '2'),
+(37, 'Paro2 G', 'Lorem', 'Covered Court', '2022-02-08', '2022-02-08', '10:00:00', '12:00:00', 'posted', NULL, NULL, 61, NULL, 5, '1');
 
 -- --------------------------------------------------------
 
@@ -157,55 +163,30 @@ CREATE TABLE `tbl_log` (
 --
 
 INSERT INTO `tbl_log` (`id`, `user_id`, `date`, `log_type`) VALUES
-(1, 2, '2021-09-27 23:16:44', 'login'),
-(2, 2, '2021-09-27 23:16:44', 'login'),
-(21, 2, '2021-10-01 19:26:06', 'login'),
-(22, 2, '2021-10-01 19:26:36', 'login'),
-(35, 2, '2021-10-07 19:18:18', 'login'),
-(36, 2, '2021-10-07 19:18:41', 'login'),
-(38, 2, '2021-10-07 19:21:42', 'login'),
-(39, 2, '2021-10-07 19:22:01', 'login'),
-(40, 2, '2021-10-07 19:22:42', 'login'),
-(41, 2, '2021-10-07 19:24:13', 'login'),
-(42, 2, '2021-10-07 19:24:29', 'login'),
-(43, 2, '2021-10-07 19:26:47', 'login'),
-(44, 2, '2021-10-07 19:27:13', 'login'),
-(47, 2, '2021-10-07 19:46:13', 'login'),
-(50, 2, '2021-10-07 22:31:46', 'login'),
-(52, 2, '2021-10-09 09:42:23', 'login'),
-(54, 2, '2021-10-09 09:44:49', 'login'),
-(56, 2, '2021-10-09 19:38:19', 'login'),
-(59, 2, '2021-10-10 15:45:45', 'login'),
-(60, 2, '2021-10-10 19:46:18', 'login'),
-(62, 2, '2021-10-10 19:54:58', 'login'),
-(64, 2, '2021-10-10 20:13:19', 'login'),
-(66, 2, '2021-10-11 19:58:25', 'login'),
-(69, 2, '2021-10-11 20:33:29', 'login'),
-(71, 2, '2021-10-11 20:36:55', 'login'),
-(73, 2, '2021-10-11 20:40:04', 'login'),
-(75, 2, '2021-10-11 21:19:37', 'login'),
-(78, 2, '2021-10-11 22:25:01', 'login'),
-(83, 2, '2021-10-11 22:36:15', 'login'),
-(88, 2, '2021-10-12 21:14:32', 'login'),
-(89, 2, '2021-10-12 21:19:07', 'login'),
-(91, 2, '2021-10-12 21:46:04', 'login'),
-(92, 2, '2021-10-12 21:46:52', 'login'),
-(99, 2, '2021-10-12 22:42:02', 'login'),
-(100, 2, '2021-10-12 22:43:07', 'login'),
-(101, 2, '2021-10-15 19:55:37', 'login'),
-(102, 2, '2021-10-16 17:53:17', 'login'),
-(104, 2, '2021-10-16 20:44:54', 'login'),
-(106, 2, '2021-10-16 20:57:45', 'login'),
-(107, 48, '2021-10-16 21:54:20', 'login'),
-(108, 49, '2021-10-16 22:02:02', 'login'),
-(109, 2, '2021-10-16 22:18:47', 'login'),
-(110, 48, '2021-10-16 22:25:49', 'login'),
-(111, 2, '2021-10-16 22:41:47', 'login'),
-(112, 2, '2021-10-16 22:42:12', 'login'),
-(113, 2, '2021-10-16 22:44:09', 'login'),
-(114, 2, '2021-10-16 22:46:12', 'login'),
-(115, 2, '2021-10-16 22:49:08', 'login'),
-(116, 2, '2021-10-16 22:49:50', 'login');
+(122, 49, '2021-11-14 21:55:12', 'login'),
+(123, 49, '2021-11-19 09:13:19', 'login'),
+(124, 60, '2021-11-21 17:50:32', 'login'),
+(125, 49, '2021-11-21 17:50:43', 'login'),
+(126, 2, '2021-11-21 17:58:46', 'login'),
+(127, 49, '2021-11-21 18:03:11', 'login'),
+(128, 2, '2021-11-21 18:08:52', 'login'),
+(129, 49, '2021-11-21 18:09:19', 'login'),
+(130, 61, '2021-11-21 18:10:50', 'login'),
+(131, 49, '2021-11-21 18:11:04', 'login'),
+(132, 2, '2021-12-02 10:04:30', 'login'),
+(133, 49, '2021-12-02 10:16:55', 'login'),
+(134, 2, '2021-12-02 10:23:34', 'login'),
+(135, 49, '2021-12-02 10:24:45', 'login'),
+(136, 49, '2021-12-03 10:13:29', 'login'),
+(137, 2, '2022-02-03 08:52:40', 'login'),
+(138, 2, '2022-02-03 09:39:17', 'login'),
+(139, 49, '2022-02-04 08:40:35', 'login'),
+(140, 2, '2022-02-05 18:32:17', 'login'),
+(141, 61, '2022-02-05 18:46:17', 'login'),
+(142, 61, '2022-02-05 19:06:40', 'login'),
+(143, 2, '2022-02-05 20:44:07', 'login'),
+(144, 62, '2022-02-05 21:27:18', 'login'),
+(145, 61, '2022-02-05 21:28:33', 'login');
 
 -- --------------------------------------------------------
 
@@ -226,7 +207,20 @@ INSERT INTO `tbl_role` (`id`, `role_desc`) VALUES
 (1, 'admin'),
 (2, 'student'),
 (3, 'department head'),
-(4, 'faculty');
+(4, 'faculty'),
+(5, 'all');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_sms_recipient`
+--
+
+CREATE TABLE `tbl_sms_recipient` (
+  `id` int(11) NOT NULL,
+  `user_id` int(50) DEFAULT NULL,
+  `event_id` int(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -267,18 +261,23 @@ CREATE TABLE `tbl_users` (
   `mobile_number` varchar(50) NOT NULL,
   `username` varchar(200) NOT NULL,
   `password` varchar(200) NOT NULL,
-  `role` int(11) DEFAULT NULL
+  `role` int(11) DEFAULT NULL,
+  `role_all` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_users`
 --
 
-INSERT INTO `tbl_users` (`user_id`, `id_number`, `firstname`, `middlename`, `lastname`, `email`, `mobile_number`, `username`, `password`, `role`) VALUES
-(2, '', 'Harry', 'Doe', 'Lim', 'harry_doe@gmail.com', '09123456789', 'admin', '$2y$10$tWpKFzXEbRoT/fd6811ndOHfg7sZAtAQuXEPCYSxwRgBwWnemkH.m', 1),
-(3, '', 'Jane', 'Sy', 'Doe', 'jane_doe@gmail.com', '09789456123', 'admin2', '$2y$10$HEF1lGv2J61ypA048pMsEORv.h7ugUziGzmvX9o848y2WrMgG0kFW', 1),
-(48, '21-9587', 'Raymund', 'Aloria', 'Hermoso', 'rayhermoso8@mail.com', '095687412', 'ray', '$2y$10$fm74qp.K4pEgcvFpHOr4ouwK/qI8WxoSbevXdDqMZ/4SHr0Kpuyma', 2),
-(49, '21-1236', 'Stephanny', 'Demonteverde', 'Bautista', 'steph@gmail.com', '09456789321', 'step', '$2y$10$ztNbKS0g8WGkVIzaT7tM0epsMIX5Uhgnq5kijr6NabEZt9UgIw1bq', 3);
+INSERT INTO `tbl_users` (`user_id`, `id_number`, `firstname`, `middlename`, `lastname`, `email`, `mobile_number`, `username`, `password`, `role`, `role_all`) VALUES
+(2, '21-0001', 'Harry', 'Doe', 'Lim', 'harry_doe@gmail.com', '09123456789', 'admin', '$2y$10$tWpKFzXEbRoT/fd6811ndOHfg7sZAtAQuXEPCYSxwRgBwWnemkH.m', 1, 5),
+(3, '21-0002', 'Jane', 'Sy', 'Doe', 'jane_doe@gmail.com', '09789456123', 'admin2', '$2y$10$HEF1lGv2J61ypA048pMsEORv.h7ugUziGzmvX9o848y2WrMgG0kFW', 1, 5),
+(48, '21-9587', 'Raymund', 'Aloria', 'Hermoso', 'rayhermoso8@mail.com', '095687412', 'ray', '$2y$10$fm74qp.K4pEgcvFpHOr4ouwK/qI8WxoSbevXdDqMZ/4SHr0Kpuyma', 2, 5),
+(49, '21-1236', 'Stephannys', 'Demonteverdes', 'Bautista', 'steph@gmail.com', '09456789321', 'step', '$2y$10$ztNbKS0g8WGkVIzaT7tM0epsMIX5Uhgnq5kijr6NabEZt9UgIw1bq', 3, 5),
+(59, '14-0123', 'Alvin', 'Mahinay', 'Debuyan', 'alvin@gmail.com', '0945789632', 'alvin', '$2y$10$PKMgkPY4Ze2PLFUk7Php4.yk9W6szJB9/kEOxCgmdLVn3yNRmtU5m', 4, 5),
+(60, '12-9636', 'Amed', 'Doll', 'Debuyan', 'amed@gmail.com', '09784512963', 'amed', '$2y$10$mZTqH2DWivURRgIR6jYooOYi/lEavBlRF0FlJX1sCFw0ZXeQNn4v.', 2, 5),
+(61, '21-1235', 'Ronald', 'Alonzo', 'Pascual', 'ronald@gmail.com', '09386997571', 'ronald', '$2y$10$0dhi49Hso6HTVgAHlXrbsuH471dT/rtp88hs1vRj4uuaY3M/7nqem', 3, 5),
+(62, '12-9637', 'Jay', 'Ar', 'Siaboc', 'jay@gmail.com', '09987654321', 'jay', '$2y$10$1V0HNhO4jx4V9YfxQ2n/N.jIGJmmRf3/N/TxR8YkN18wh6ZCLei6a', 2, 5);
 
 --
 -- Indexes for dumped tables
@@ -309,7 +308,9 @@ ALTER TABLE `tbl_department_head`
 --
 ALTER TABLE `tbl_event`
   ADD PRIMARY KEY (`event_id`),
-  ADD KEY `tbl_events_ibfk_1` (`user_id`);
+  ADD KEY `tbl_event_ibfk_1` (`user_id`),
+  ADD KEY `tbl_event_ibfk_2` (`invited_department`),
+  ADD KEY `tbl_event_ibfk_3` (`invitee`);
 
 --
 -- Indexes for table `tbl_faculty`
@@ -329,6 +330,14 @@ ALTER TABLE `tbl_log`
 --
 ALTER TABLE `tbl_role`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_sms_recipient`
+--
+ALTER TABLE `tbl_sms_recipient`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tbl_sms_recipient_ibfk_1` (`user_id`),
+  ADD KEY `tbl_sms_recipient_ibfk_2` (`event_id`);
 
 --
 -- Indexes for table `tbl_student`
@@ -352,7 +361,7 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `tbl_course`
 --
 ALTER TABLE `tbl_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_department`
@@ -370,7 +379,7 @@ ALTER TABLE `tbl_department_head`
 -- AUTO_INCREMENT for table `tbl_event`
 --
 ALTER TABLE `tbl_event`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `tbl_faculty`
@@ -382,13 +391,19 @@ ALTER TABLE `tbl_faculty`
 -- AUTO_INCREMENT for table `tbl_log`
 --
 ALTER TABLE `tbl_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
 
 --
 -- AUTO_INCREMENT for table `tbl_role`
 --
 ALTER TABLE `tbl_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tbl_sms_recipient`
+--
+ALTER TABLE `tbl_sms_recipient`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_student`
@@ -400,7 +415,7 @@ ALTER TABLE `tbl_student`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- Constraints for dumped tables
@@ -422,13 +437,22 @@ ALTER TABLE `tbl_department_head`
 -- Constraints for table `tbl_event`
 --
 ALTER TABLE `tbl_event`
-  ADD CONSTRAINT `tbl_event_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbl_event_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_event_ibfk_2` FOREIGN KEY (`invited_department`) REFERENCES `tbl_department` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_event_ibfk_3` FOREIGN KEY (`invitee`) REFERENCES `tbl_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_log`
 --
 ALTER TABLE `tbl_log`
   ADD CONSTRAINT `tbl_log_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_sms_recipient`
+--
+ALTER TABLE `tbl_sms_recipient`
+  ADD CONSTRAINT `tbl_sms_recipient_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_sms_recipient_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `tbl_event` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_student`

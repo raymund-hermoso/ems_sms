@@ -1,5 +1,8 @@
 <?php
 include_once('DbConnection.php');
+
+//start session
+session_start();
  
 class CheckUserDetails extends DbConnection{
  
@@ -11,20 +14,21 @@ class CheckUserDetails extends DbConnection{
     public function invalidUsername($username){
 		$result;
 		if(!preg_match("/^[a-zA-Z0-9]*$/", $username)){
-			$result = true;
+			$result = false;
 		}
 		else{
-			$result = false;
+			$result = true;
 		}
 		return $result;
 	}
+    
 	public function invalidEmail($email){
 		$result;
 		if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-			$result = true;
+			$result = false;
 		}
 		else{
-			$result = false;
+			$result = true;
 		}
 		return $result;
 	}
@@ -32,10 +36,10 @@ class CheckUserDetails extends DbConnection{
 	public function pwdMatch($password, $pwdrepeat){
 		$result;
 		if($password !== $pwdrepeat){
-			$result = true;
+			$result = false;
 		}
 		else{
-			$result = false;
+			$result = true;
 		}
 		return $result;
 	}
@@ -54,6 +58,7 @@ class CheckUserDetails extends DbConnection{
             $checkPwd = password_verify($password, $hashedPwd);
 
             if($checkPwd == 1){
+                $_SESSION['id_number'] = $row['id_number'];
                 return $row['user_id'];
             }
             else{
@@ -154,6 +159,15 @@ class CheckUserDetails extends DbConnection{
         else{
             return false;
         }
+    }
+
+    public function details($sql){
+ 
+        $query = $this->connection->query($sql);
+ 
+        $row = $query->fetch_array();
+ 
+        return $row;       
     }
 
  

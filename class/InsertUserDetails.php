@@ -13,7 +13,7 @@ class InsertUserDetails extends DbConnection{
 
         $hash_pwd = password_hash($password, PASSWORD_DEFAULT);
  
-        $sql = "INSERT INTO tbl_users (id_number, firstname, middlename, lastname, email, mobile_number, username, password) VALUES ('$id_number', '$firstname', '$middlename', '$lastname', '$email', '$mobile_number', '$username', '$hash_pwd')";
+        $sql = "INSERT INTO tbl_users (id_number, firstname, middlename, lastname, email, mobile_number, username, password, role_all) VALUES ('$id_number', '$firstname', '$middlename', '$lastname', '$email', '$mobile_number', '$username', '$hash_pwd', 5)";
         $query = $this->connection->query($sql);
 
         if ($query === TRUE) {
@@ -30,7 +30,7 @@ class InsertUserDetails extends DbConnection{
 
         if ($query === TRUE) {
             $_SESSION['message'] = 'New Student added';
-            header('location:../admin/student.php');
+            header('location:../admin/pages/student.php');
         } else {
             return false;
         }
@@ -43,7 +43,7 @@ class InsertUserDetails extends DbConnection{
 
         if ($query === TRUE) {
             $_SESSION['message'] = 'New Faculty added';
-            header('location:../admin/faculty.php');
+            header('location:../admin/pages/faculty.php');
         } else {
             return false;
         }
@@ -56,7 +56,7 @@ class InsertUserDetails extends DbConnection{
 
         if ($query === TRUE) {
             $_SESSION['message'] = 'New Department Head added';
-            header('location:../admin/department_head.php');
+            header('location:../admin/pages/department_head.php');
         } else {
             return false;
         }

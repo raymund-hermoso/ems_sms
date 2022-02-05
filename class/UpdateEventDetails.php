@@ -15,8 +15,21 @@ class UpdateEventDetails extends DbConnection{
         $query = $this->connection->query($sql);
 
         if ($query === TRUE) {
-            $_SESSION['message'] = 'Event was Approved';
-            header('location:../admin/view-event.php?id='.$approved_event_id);
+            $_SESSION['message'] = 'Event was approved';
+            header('location:../admin/pages/view-event.php?id='.$approved_event_id);
+        } else {
+            return false;
+        }
+    }
+
+    //Disapproved Event
+    public function disapproved_event($disapproved_event_id){
+        $sql = "UPDATE tbl_event SET status = 'disapproved' WHERE event_id = '$disapproved_event_id'";
+        $query = $this->connection->query($sql);
+
+        if ($query === TRUE) {
+            $_SESSION['message'] = 'Event was disapproved';
+            header('location:../admin/pages/view-event.php?id='.$disapproved_event_id);
         } else {
             return false;
         }
@@ -28,7 +41,7 @@ class UpdateEventDetails extends DbConnection{
         $date_now = date("Y-m-d");
         $time_now = date("h:i:sa");
 
-        $sql = "UPDATE tbl_event SET status = 'post', date_posted = '$date_now', time_posted = '$time_now' WHERE event_id = '$post_event_id'";
+        $sql = "UPDATE tbl_event SET status = 'posted', date_posted = '$date_now', time_posted = '$time_now' WHERE event_id = '$post_event_id'";
         $query = $this->connection->query($sql);
 
         if ($query === TRUE) {

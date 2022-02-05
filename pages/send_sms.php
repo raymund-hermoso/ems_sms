@@ -3,16 +3,6 @@
 	include '../include/header.php';
 	include '../class/FetchEvent.php';
 ?>
-	<style>
-		#event-btn {
-			display: flex;
-			list-style: none;
-			margin: 0;
-		}
-		#event-btn li {
-			margin-right: 10px;
-		}
-	</style>
 	<div id="wrapper">
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -22,24 +12,16 @@
                 <div id="content">
 					<section id="event" class="section">
 						<div class="container">
-							<h2 class="m-0 text-dark custom-heading-h2" data-aos="fade-down">Event</h2>
+							<h2 class="m-0 text-dark custom-heading-h2" data-aos="fade-down">Send a Message</h2>
 					
 							<!-- DataTales Example -->
 							<div class="card shadow mb-4">
 								<div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
-									<h6 class="m-0 font-weight-bold text-primary">List</h6>
-									<ul id="event-btn">
-										<li>
-											<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#AddEventModal">
-												Add Event
-											</a>
-										</li>
-										<li>
-											<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#AddEventModal-Request">
-												Request Event
-											</a>
-										</li>
-									</ul>
+									<h6 class="m-0 font-weight-bold text-primary">Select a Recipient (Max 100)</h6>
+									
+									<a href="?send_sms=all" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+										Send to All
+									</a>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
@@ -47,27 +29,23 @@
 											<thead>
 												<tr>
 													<th>Title</th>
-													<th>Venue</th>
-													<th>Invited</th>
-													<th>Event Type</th>
-													<th>Status</th>
+													<th>Name</th>
+													<th>Number</th>
 													<th>Actions</th>
 												</tr>
 											</thead>
 											<tfoot>
 												<tr>
 													<th>Title</th>
-													<th>Venue</th>
-													<th>Invited</th>
-													<th>Event Type</th>
-													<th>Status</th>
+													<th>Name</th>
+													<th>Number</th>
 													<th>Actions</th>
 												</tr>
 											</tfoot>
 											<tbody>
 											<?php 
 												$event = new FetchEvent();
-												$event->getEventRequested();
+												$event->getEventRecipient();
 											?>
 											</tbody>
 										</table>

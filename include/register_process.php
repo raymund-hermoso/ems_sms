@@ -30,6 +30,7 @@ if(isset($_POST['register'])){
 
 	$school_id_number_student = $user->check_id_number_student($id_number);
 	$school_id_number_dh = $user->check_id_number_dh($id_number);
+	$school_id_number_faculty = $user->check_id_number_faculty($id_number);
 
 	// $check_password = $user->check_password($password);
 
@@ -37,7 +38,7 @@ if(isset($_POST['register'])){
 		$_SESSION['message'] = 'ID Number already registered';
     	header('location:../register.php?id_no='.$id_number.'&fname='.$firstname.'&mname='.$middlename.'&lname='.$lastname.'&email='.$email.'&course='.$course.'&mobile_number='.$mobile_number.'&username='.$username);
 	}
-	else if($validate_email !== false){
+	else if($validate_email == false){
 		$_SESSION['message'] = 'Invalid Email';
     	header('location:../register.php?id_no='.$id_number.'&fname='.$firstname.'&mname='.$middlename.'&lname='.$lastname.'&email='.$email.'&course='.$course.'&mobile_number='.$mobile_number.'&username='.$username);
 	}
@@ -45,7 +46,7 @@ if(isset($_POST['register'])){
 		$_SESSION['message'] = 'Email already exists';
     	header('location:../register.php?id_no='.$id_number.'&fname='.$firstname.'&mname='.$middlename.'&lname='.$lastname.'&email='.$email.'&course='.$course.'&mobile_number='.$mobile_number.'&username='.$username);
 	}
-	else if($validate_username !== false){
+	else if($validate_username == false){
 		$_SESSION['message'] = 'Invalid username (hint: a-z, A-Z, 0-9)';
     	header('location:../register.php?id_no='.$id_number.'&fname='.$firstname.'&mname='.$middlename.'&lname='.$lastname.'&email='.$email.'&course='.$course.'&mobile_number='.$mobile_number.'&username='.$username);
 	}
@@ -53,7 +54,7 @@ if(isset($_POST['register'])){
 		$_SESSION['message'] = 'Username already exists';
     	header('location:../register.php?id_no='.$id_number.'&fname='.$firstname.'&mname='.$middlename.'&lname='.$lastname.'&email='.$email.'&course='.$course.'&mobile_number='.$mobile_number.'&username='.$username);
 	}
-	else if($validate_password !== false){
+	else if($validate_password == false){
 		$_SESSION['message'] = 'Password does not match';
     	header('location:../register.php?id_no='.$id_number.'&fname='.$firstname.'&mname='.$middlename.'&lname='.$lastname.'&email='.$email.'&course='.$course.'&mobile_number='.$mobile_number.'&username='.$username);
 	}
@@ -70,6 +71,15 @@ if(isset($_POST['register'])){
 		if($insert_user->add_user($id_number, $firstname, $middlename, $lastname, $email, $mobile_number, $username, $password)){
 			$role = 3;
 			$update_user->update_role_department_head($school_id_number_dh, $role);
+		}
+		else{
+			echo 'error3';
+		}
+	}
+	else if($school_id_number_faculty !== false){
+		if($insert_user->add_user($id_number, $firstname, $middlename, $lastname, $email, $mobile_number, $username, $password)){
+			$role = 4;
+			$update_user->update_role_faculty($school_id_number_faculty, $role);
 		}
 		else{
 			echo 'error3';

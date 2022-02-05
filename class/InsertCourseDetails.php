@@ -17,19 +17,19 @@ class InsertCourseDetails extends DbConnection{
         if ($query === TRUE) {
             $_SESSION['message'] = 'New Course added';
             if($dept_id == 1){
-                header('location:../admin/cbm.php?department=1');
+                header('location:../admin/pages/cbm.php?department=1');
             }
             else if($dept_id == 2){
-                header('location:../admin/cte.php?department=2');
+                header('location:../admin/pages/cte.php?department=2');
             }
             else if($dept_id == 3){
-                header('location:../admin/cit.php?department=3');
+                header('location:../admin/pages/cit.php?department=3');
             }
             else if($dept_id == 4){
-                header('location:../admin/cjc.php?department=4');
+                header('location:../admin/pages/cjc.php?department=4');
             }
             else if($dept_id == 5){
-                header('location:../admin/caf.php?department=5');
+                header('location:../admin/pages/caf.php?department=5');
             }
             else{
                 echo 'error';

@@ -31,7 +31,9 @@ class FetchUser extends DbConnection{
                             echo '<span class="badge badge-success">Registered</span>';
                         }
                 echo    '</td>
-                        <td><a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a></td>
+                        <td>';
+                            if($row['id_number'] != '') { echo '<a href="update_user.php?sin='.$row['school_id_number'].'" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>'; }
+                echo    '</td>
                     </tr>';
             }
         }
@@ -62,7 +64,9 @@ class FetchUser extends DbConnection{
                             echo '<span class="badge badge-success">Registered</span>';
                         }
                 echo    '</td>
-                        <td><a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a></td>
+                        <td>';
+                            if($row['id_number'] != '') { echo '<a href="update_user.php?sin='.$row['school_id_number'].'" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>'; }
+                echo    '</td>
                     </tr>';
             }
         }
@@ -70,6 +74,7 @@ class FetchUser extends DbConnection{
             return false;
         }
     }
+
 
     //Department Head Users
     public function getUsersFaculty(){
@@ -92,7 +97,9 @@ class FetchUser extends DbConnection{
                             echo '<span class="badge badge-success">Registered</span>';
                         }
                 echo    '</td>
-                        <td><a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a></td>
+                        <td>';
+                            if($row['id_number'] != '') { echo '<a href="update_user.php?sin='.$row['school_id_number'].'" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>'; }
+                echo    '</td>
                     </tr>';
             }
         }
@@ -106,6 +113,16 @@ class FetchUser extends DbConnection{
         $query = $this->connection->query($sql);
  
         $row = $query->fetch_array();
+ 
+        return $row;       
+    }
+
+    public function user_details($sin){
+
+        $sql = "SELECT * FROM tbl_users WHERE id_number = '$sin'";
+        $query = $this->connection->query($sql);
+ 
+        $row = $query->fetch_assoc();
  
         return $row;       
     }

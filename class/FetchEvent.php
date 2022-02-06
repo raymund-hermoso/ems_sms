@@ -273,7 +273,7 @@ class FetchEvent extends DbConnection{
                         <td>'.$row['lastname'].', '.$row['firstname'].' '.$row['lastname'].'</td>
                         <td>'.$row['mobile_number'].'</td>
                         <td>
-                            <a href="?send_sms=one&number='.$row['mobile_number'].'&event_id='.$event_id.'" class="btn btn-primary btn-sm">Send</a>';
+                            <a href="?send_sms=one&number='.$row['mobile_number'].'&inv_dept='.$inv_dept.'&invitee='.$invitee.'&event_id='.$event_id.'" class="btn btn-primary btn-sm">Send</a>';
                         // if($row['status'] == 'approved'){
                         //     echo '<a href="view-event.php?id='.$row['event_id'].'" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</a>';
                         // }else{
@@ -294,30 +294,39 @@ class FetchEvent extends DbConnection{
         $sql = "SELECT * FROM tbl_event WHERE event_id = '$event_id'";
         $query = $this->connection->query($sql);
 
+        $number = isset($_GET['number']) ? $_GET['number'] : '';
+
+        $apicode = 'ST-RAYMU997571_K5CDJ';
+        $passwd = '6jkq[lc@83';
+
         if($query->num_rows > 0){
 
             $row = $query->fetch_assoc();
 
-            $number = isset($_GET['number']) ? $_GET['number'] : '';
-        
-            $apicode = 'ST-RAYMU997571_QJYRN';
-            $passwd = '][@u4@!mha';
+            $message =  'This is to inform you that we have an event.'.PHP_EOL;
+            $message .=  ''.PHP_EOL;
+            $message .= 'Title: '.$row['title'].PHP_EOL;
+            $message .= 'Description: '.$row['event_desc'].PHP_EOL;
+            $message .= 'Venue: '.$row['venue'].PHP_EOL;
+            $message .= date("F j, Y", strtotime($row['date_start'])).' - '.date("F j, Y", strtotime($row['date_end'])).PHP_EOL;
+            $message .= date("g:i a", strtotime($row['time_start'])).' - '.date("g:i a", strtotime($row['time_end'])).PHP_EOL;
 
-            $message = $row['title'];
-
-            $url = 'https://www.itexmo.com/php_api/api.php';
-            $itexmo = array('1' => $number, '2' => $message, '3' => $apicode, 'passwd' => $passwd);
-            $param = array(
-                    'http'    => array(
-                    'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                    'method'  => 'POST',
-                    'content' => http_build_query($itexmo),
-                ),
-            );
-            $context  = stream_context_create($param);
-            return file_get_contents($url, false, $context);
-
+            $message .=  ''.PHP_EOL;
+            $message .=  'Thankyou.'.PHP_EOL;
+            $message .=  ''.PHP_EOL;
         }
+
+        $url = 'https://www.itexmo.com/php_api/api.php';
+        $itexmo = array('1' => $number, '2' => $message, '3' => $apicode, 'passwd' => $passwd);
+        $param = array(
+                'http'    => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($itexmo),
+            ),
+        );
+        $context  = stream_context_create($param);
+        return file_get_contents($url, false, $context);
         
     }
  
@@ -328,6 +337,11 @@ class FetchEvent extends DbConnection{
 }
 
 if(isset($_GET['send_sms'])) {
+
+    $inv_dept = isset($_GET['inv_dept']) ? $_GET['inv_dept'] : '';
+    $invitee = isset($_GET['invitee']) ? $_GET['invitee'] : '';
+    $event_id = isset($_GET['event_id']) ? $_GET['event_id'] : '';
+
     if(isset($_GET['send_sms']) == 'one'){
 
         $event_id = isset($_GET['event_id']) ? $_GET['event_id'] : '';
@@ -343,6 +357,7 @@ if(isset($_GET['send_sms'])) {
         }
         else if ($result == 0){
             $_SESSION['message'] = "Message Sent!";
+            header("location: send_sms.php?invitee=".$invitee."&event_id=".$event_id);
         }
         else{	
             echo "Error Num ". $result . " was encountered!";

@@ -96,11 +96,11 @@
 
 <!-- Add Event Modal-->
 <div class="modal fade" id="AddEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <form class="user" method="POST" action="../../include/add_event_process.php">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Request Event</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Event</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -118,6 +118,8 @@
                         <label>Venue</label>
                         <input type="text" class="form-control form-control-user" name="venue" required>
                     </div>
+
+                    <hr>
                     
                     <div class="form-group row">
                         <div class="col-sm-3 mb-3 mb-sm-0">
@@ -139,7 +141,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" name="add_event" class="btn btn-primary btn-user btn-block">Add</button>
+                    <button type="submit" name="add_event" class="btn btn-primary btn-user btn-block">Request</button>
                     <button class="btn btn-secondary btn-user btn-block" type="button" data-dismiss="modal">Cancel</button>
                 </div>
             </div>

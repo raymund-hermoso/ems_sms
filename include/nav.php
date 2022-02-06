@@ -13,10 +13,10 @@
             <i class="fa fa-bars"></i>
         </button>
         <a href="home.php" class="navbar-brand">
-            <img src="#" alt="Logo" class="brand-image img-circle elevation-3 aos-init aos-animate" style="opacity: .8" data-aos="zoom-in">
+            <img src="../img/assets/logo.png" style="width: 50%; margin-right: 10px;" alt="Logo" class="brand-image img-circle elevation-3 aos-init aos-animate" style="opacity: .8" data-aos="zoom-in">
             
             <div id="cust-brand-text">
-                <span class="brand-text font-weight-light">EMS</span>
+                <span class="brand-text font-weight-light" style="margin-top: 12px; display: block;">EMS</span>
             </div>
         </a>
         <ul class="navbar-nav">

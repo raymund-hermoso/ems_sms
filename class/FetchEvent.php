@@ -134,8 +134,9 @@ class FetchEvent extends DbConnection{
     public function getEventRequested(){
 
         $user_id = $_SESSION['user_id'];
- 
+        
         $sql = "SELECT a.*, b.* FROM tbl_event AS a LEFT JOIN tbl_role AS b ON a.invitee = b.id WHERE a.user_id = '$user_id'";
+        
         $query = $this->connection->query($sql);
  
         if($query->num_rows > 0){
@@ -176,7 +177,7 @@ class FetchEvent extends DbConnection{
                             // echo '<a href="#" data-toggle="modal" data-target="#PostEventModal" class="btn btn-success btn-user btn-sm"><i class="fas fa-sticky-note"></i> Post</a>';
                         }
                         else if($row['status'] == 'posted'){
-                            echo '<a href="send_sms.php?inv_dept='.$row['invited_department'].'&invitee='.$row['invitee'].'&event_id='.$row['event_id'].'" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Send Message</a>';
+                            echo '<a href="send_sms.php?inv_dept='.$row['invited_department'].'&invitee='.$row['invitee'].'&event_id='.$row['event_id'].'&event_type='.$row['event_type'].'" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Send Message</a>';
                         }else{
                             echo '<a href="view-event.php?id='.$row['event_id'].'" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</a>';
                         }
@@ -250,19 +251,48 @@ class FetchEvent extends DbConnection{
         }
     }
 
-    //Events Details Recipient
+    //Events Details Recipient Student
     public function getEventRecipient(){
 
         $inv_dept = isset($_GET['inv_dept']) ? $_GET['inv_dept'] : '';
         $invitee = isset($_GET['invitee']) ? $_GET['invitee'] : '';
         $event_id = isset($_GET['event_id']) ? $_GET['event_id'] : '';
+        $event_type = isset($_GET['event_type']) ? $_GET['event_type'] : '';
+        $department_id = isset($_SESSION['department_id']) ? $_SESSION['department_id'] : "";
 
-        if($invitee == 5) {
-            $sql = "SELECT a.*, b.* FROM tbl_event AS a LEFT JOIN tbl_users AS b ON a.invitee = b.role_all WHERE b.role != 1 AND a.event_type = 1";
+        if($event_type == 1) {
+
+            // Department Head All Invited - event type = 1
+            $sql = "SELECT a.*, b.*, c.*, d.*, e.*, f.*, g.* FROM tbl_student a, 
+                                                        tbl_course b, 
+                                                        tbl_department c,
+                                                        tbl_users d, 
+                                                        tbl_event e,
+                                                        tbl_role f, 
+                                                        tbl_faculty g
+                                            
+                                                    WHERE 
+                                                            (g.school_id_number = d.id_number OR a.school_id_number = d.id_number) AND 
+                                                            b.dept_id = c.id AND
+                                                            a.course_id = b.id AND
+                                                            d.role = f.id AND 
+                                                            c.id = '$department_id' AND e.event_id = '$event_id' GROUP BY d.id_number";
+        }
+        else if($event_type == 2) {
+            $sql = "SELECT a.*, b.*, c.* FROM tbl_users a,
+                                            tbl_event b,
+                                            tbl_role c
+                                            
+                                            WHERE 
+                                            c.id = a.role AND
+                                            b.event_id = '$event_id' AND
+                                            (a.role = '$invitee' OR a.role_all = '$invitee')";
         }
         else {
-            $sql = "SELECT a.*, b.*, c.*, d.*, e.* FROM tbl_users AS a LEFT JOIN tbl_student AS b ON a.id_number = b.school_id_number LEFT JOIN tbl_faculty AS c ON a.id_number = c.school_id_number LEFT JOIN tbl_department_head AS d ON a.id_number = d.school_id_number LEFT JOIN tbl_event AS e ON a.role = e.invitee WHERE a.role = '$inv_dept' OR b.course_id = '$invitee' AND e.event_id = '$event_id'";
+
         }
+
+    
 
         $query = $this->connection->query($sql);
  
@@ -270,6 +300,74 @@ class FetchEvent extends DbConnection{
             while($row = $query->fetch_assoc()){
                 echo '<tr>
                         <td>'.$row['title'].'</td>
+                        <td>'.$row['id_number'].'</td>
+                        <td><span class="badge ';
+                        
+                        if($row['role_desc'] == 'student'){ 
+                            echo 'badge-primary';
+                        }
+                        else if($row['role_desc'] == 'faculty') {
+                            echo 'badge-warning';
+                        }
+                        else if($row['role_desc'] == 'admin') {
+                            echo 'badge-success';
+                        }
+                        else {
+                            echo 'n';
+                        }
+                echo '">'.ucfirst($row['role_desc']).'</span></td>
+                        <td>'.$row['lastname'].', '.$row['firstname'].' '.$row['lastname'].'</td>
+                        <td>'.$row['mobile_number'].'</td>
+                        <td>
+                            <a href="?send_sms=one&number='.$row['mobile_number'].'&inv_dept='.$inv_dept.'&invitee='.$invitee.'&event_id='.$event_id.'" class="btn btn-primary btn-sm">Send</a>';
+                        // if($row['status'] == 'approved'){
+                        //     echo '<a href="view-event.php?id='.$row['event_id'].'" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</a>';
+                        // }else{
+                        //     echo '<a href="send_sms.php?inv_role='.$row['invited_role'].'&inv_course='.$row['invited_course'].'" class="btn btn-primary btn-sm">Send Message</a>';
+                        // }
+                echo    '</td>
+                    </tr>';
+
+            }
+        }
+        else{
+            // echo 'None';
+        }
+    }
+
+    //Events Details Recipient Faculty
+    public function getEventRecipient_Faculty(){
+
+        $inv_dept = isset($_GET['inv_dept']) ? $_GET['inv_dept'] : '';
+        $invitee = isset($_GET['invitee']) ? $_GET['invitee'] : '';
+        $event_id = isset($_GET['event_id']) ? $_GET['event_id'] : '';
+        $event_type = isset($_GET['event_type']) ? $_GET['event_type'] : '';
+        $department_id = isset($_SESSION['department_id']) ? $_SESSION['department_id'] : "";
+
+        if($event_type == 1) {
+
+            // Department Head All Invited - event type = 1
+            $sql = "SELECT a.*, b.*, c.*, d.*, e.* FROM tbl_faculty a,
+                                                        tbl_department b,
+                                                        tbl_users c,
+                                                        tbl_event d,
+                                                        tbl_role e
+                                            
+                                                    WHERE a.dept_id = b.id AND
+                                                            a.school_id_number = c.id_number AND
+                                                            e.id = c.role AND d.event_id = '$event_id'";
+        }
+
+    
+
+        $query = $this->connection->query($sql);
+ 
+        if($query->num_rows > 0){
+            while($row = $query->fetch_assoc()){
+                echo '<tr>
+                        <td>'.$row['title'].'</td>
+                        <td>'.$row['id_number'].'</td>
+                        <td><span class="badge badge-primary">'.ucfirst($row['role_desc']).'</span></td>
                         <td>'.$row['lastname'].', '.$row['firstname'].' '.$row['lastname'].'</td>
                         <td>'.$row['mobile_number'].'</td>
                         <td>

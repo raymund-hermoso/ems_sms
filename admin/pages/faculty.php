@@ -1,6 +1,7 @@
 <?php
     include_once('../../include/session_admin_auth.php');
     include_once('../../class/FetchUser.php');
+    include_once('../../class/FetchDepartment.php');
     include_once('../include/header.php');
 ?>
 <!-- Page Wrapper -->
@@ -49,7 +50,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>ID Number</th>
@@ -108,6 +109,15 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <input type="text" class="form-control form-control-user" placeholder="Enter ID Number" name="id_number" autofocus>
+                    </div>
+               
+                    <div class="form-group">
+                        <select name="dept_id" class="form-control">
+                        <?php
+                        $department = new FetchDepartment();
+                        $department->getDepartment();
+                        ?>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">

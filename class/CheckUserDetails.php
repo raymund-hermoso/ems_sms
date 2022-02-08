@@ -58,6 +58,18 @@ class CheckUserDetails extends DbConnection{
             $checkPwd = password_verify($password, $hashedPwd);
 
             if($checkPwd == 1){
+
+                $user_school_id = $row['id_number'];
+
+                $sql_1 = "SELECT * FROM tbl_department_head WHERE school_id_number = '$user_school_id'";
+                $query_1 = $this->connection->query($sql_1);
+        
+                if($query_1->num_rows > 0){
+                    $row_1 = $query_1->fetch_array();
+
+                    $_SESSION['department_id'] = $row_1['department_id'];   
+                }
+
                 $_SESSION['id_number'] = $row['id_number'];
                 return $row['user_id'];
             }

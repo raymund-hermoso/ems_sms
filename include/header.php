@@ -65,6 +65,7 @@
 
 <body class="bg-gradient-primary" id="page-top">
 <?php
+// print_r($_SESSION);
 
     if(isset($_SESSION['message'])){
         if (strpos($_SERVER['REQUEST_URI'], "pages") !== false){

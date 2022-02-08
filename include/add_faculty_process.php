@@ -11,6 +11,7 @@ $insert_faculty = new InsertUserDetails();
 if(isset($_POST['add_faculty'])){
 
 	$id_number = $user->escape_string($_POST['id_number']);
+	$dept_id = $user->escape_string($_POST['dept_id']);
 
     $check_id_number_faculty = $user->check_id_number_faculty($id_number);
  
@@ -19,7 +20,7 @@ if(isset($_POST['add_faculty'])){
         header('location:../admin/pages/faculty.php');
 	}
 	else{
-		$add_faculty = $insert_faculty->add_faculty($id_number);
+		$add_faculty = $insert_faculty->add_faculty($id_number, $dept_id);
 	}
 }
 else{

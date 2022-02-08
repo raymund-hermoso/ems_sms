@@ -1,6 +1,6 @@
 <?php
 include_once('DbConnection.php');
- 
+
 class FetchDepartment extends DbConnection{
  
     public function __construct(){

@@ -46,7 +46,55 @@ class FetchEvent extends DbConnection{
                         }
                 echo    ucfirst($row['status']).'</span>
                         </td>
-                        <td><a href="view-event.php?id='.$row['event_id'].'" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> Preview</a></td>
+                        <td><a href="view-event.php?id='.$row['event_id'].'&date_start='.$row['date_start'].'&time_start='.$row['time_start'].'" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> Preview</a></td>
+                    </tr>';
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
+    //My Events (Admin)
+    public function getMyEvents(){
+        
+        $user_id = $_SESSION['user_id'];
+
+        $sql = "SELECT * FROM tbl_event WHERE user_id = '$user_id'";
+        $query = $this->connection->query($sql);
+ 
+        if($query->num_rows > 0){
+            while($row = $query->fetch_assoc()){
+        
+                $date_start = date('F j, Y', strtotime($row['date_start']));
+                $time_start = date('g:i a', strtotime($row['time_start']));
+                $date_end = date('F j, Y', strtotime($row['date_end']));
+                $time_end = date('g:i a', strtotime($row['time_end']));
+
+                echo '<tr>
+                        <td>'.$row['title'].'</td>
+                        <td>'.$date_start.' | '.$time_start.'</td>
+                        <td>'.$date_end.' | '.$time_end.'</td>
+                        <td>'.$row['venue'].'</td>
+                        <td>';
+                        if($row['status'] == 'request'){
+                            echo '<span class="badge badge-warning">';
+                        }
+                        else if($row['status'] == 'disapproved'){
+                            echo '<span class="badge badge-danger">';
+                        }
+                        else if($row['status'] == 'posted'){
+                            echo '<span class="badge badge-success">';
+                        }
+                        else if($row['status'] == 'approved'){
+                            echo '<span class="badge badge-primary">';
+                        }
+                        else{
+                            echo 'error badge';
+                        }
+                echo    ucfirst($row['status']).'</span>
+                        </td>
+                        <td><a href="my-view-event.php?id='.$row['event_id'].'" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> Preview</a></td>
                     </tr>';
             }
         }
@@ -60,7 +108,11 @@ class FetchEvent extends DbConnection{
         
         $role = $_SESSION['role'];
 
-        $sql = "SELECT * FROM tbl_event WHERE status = 'posted' ORDER BY event_id DESC LIMIT 4";
+        $limit = 4;
+
+        // $limit += isset($_GET['event_add']);
+
+        $sql = "SELECT * FROM tbl_event WHERE status = 'posted' ORDER BY event_id DESC LIMIT $limit";
         $query = $this->connection->query($sql);
  
         if($query->num_rows > 0){
@@ -193,9 +245,11 @@ class FetchEvent extends DbConnection{
     //Event Preview Details
     public function getPreviewEventDetails(){
 
+        $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
+
         $event_id = isset($_GET['id']) ? $_GET['id'] : '';
 
-        $sql = "SELECT * FROM tbl_event WHERE event_id = '$event_id'";
+        $sql = "SELECT a.*, b.*, c.* FROM tbl_event AS a LEFT JOIN tbl_department AS b ON a.invited_department = b.id LEFT JOIN tbl_role AS c ON a.invitee = c.id WHERE event_id = '$event_id'";
         $query = $this->connection->query($sql);
 
         if($query->num_rows > 0){
@@ -217,6 +271,8 @@ class FetchEvent extends DbConnection{
                     <p><b>End:</b> '.$date_end.' - '.$time_end.'</p>
                     <p><b>Status:</b>'; if($row['status'] == 'request' || $row['status'] == 'disapproved'){ echo ' <span class="badge badge-warning">'.ucfirst($row['status']); } else { echo ' <span class="badge badge-success">'.ucfirst($row['status']); } echo '</span></p>
                     <p><b>Details:</b> </br>'.$row['event_desc'].'</p>
+                    <p><b>Invited Department:</b> '.$row['department_name'].'</p>
+                    <p><b>Invitee:</b> '.ucfirst($row['role_desc']).'</p>
                     <hr>
                     <div class="form-group">';
                     if($row['status'] == 'request'){
@@ -232,7 +288,13 @@ class FetchEvent extends DbConnection{
                         echo '<a href="#" data-toggle="modal" data-target="#PostEventModal" class="btn btn-success btn-user">Post</a>';
                     }
                     else{
-                        echo '<a href="event.php" class="btn btn-primary btn-user">Back</a>';
+                        if($page == 'my-view-event.php'){
+                            echo '<a href="send-sms.php?inv_dept='.$row['invited_department'].'&invitee='.$row['invitee'].'&event_id='.$row['event_id'].'" class="btn btn-primary btn-user">Send SMS</a>';
+                        }
+                        else{
+                            echo '<a href="event.php" class="btn btn-primary btn-user">Back</a>';
+                        }
+                        
                     }
             echo    '</div>
                     </div>
@@ -272,27 +334,193 @@ class FetchEvent extends DbConnection{
                                                         tbl_faculty g
                                             
                                                     WHERE 
-                                                            (g.school_id_number = d.id_number OR a.school_id_number = d.id_number) AND 
+                                                            (
+                                                                (g.school_id_number = d.id_number AND g.dept_id = '$department_id') 
+                                                                OR 
+                                                                (a.school_id_number = d.id_number)
+                                                            ) AND 
                                                             b.dept_id = c.id AND
                                                             a.course_id = b.id AND
                                                             d.role = f.id AND 
-                                                            c.id = '$department_id' AND e.event_id = '$event_id' GROUP BY d.id_number";
+                                                            c.id = '$department_id' AND 
+                                                            e.event_id = '$event_id' 
+                                                    GROUP BY d.id_number";
         }
         else if($event_type == 2) {
-            $sql = "SELECT a.*, b.*, c.* FROM tbl_users a,
-                                            tbl_event b,
-                                            tbl_role c
+
+            if($invitee == 5 && $inv_dept == 6) {
+
+                // Department Head Invited the selected invitee (Request to admin) - event type = 2 and invitee is all
+                $sql = "SELECT a.*, b.*, c.* FROM tbl_users a,
+                                                tbl_event b,
+                                                tbl_role c
+                                                
+                                                WHERE 
+                                                a.role = c.id AND
+                                                b.event_id = '$event_id' AND
+                                                (a.role = '$invitee' OR a.role_all = '$invitee')";
+            }
+            elseif($invitee == 5) {
+
+                $sql = "SELECT a.*, b.*, c.*, d.*, e.*, f.* FROM tbl_student a, 
+                                                        tbl_course b, 
+                                                        tbl_department c,
+                                                        tbl_users d, 
+                                                        tbl_event e,
+                                                        tbl_role f, 
+                                                        tbl_faculty g
                                             
-                                            WHERE 
-                                            c.id = a.role AND
-                                            b.event_id = '$event_id' AND
-                                            (a.role = '$invitee' OR a.role_all = '$invitee')";
+                                                    WHERE 
+                                                            (
+                                                                a.school_id_number = d.id_number OR 
+                                                                g.school_id_number = d.id_number
+                                                            ) 
+                                                            AND 
+                                                            (
+                                                                a.course_id = b.id AND b.dept_id = c.id AND g.dept_id = c.id
+                                                            ) 
+                                                            AND 
+                                                            (
+                                                                c.id = '$inv_dept' AND b.dept_id = '$inv_dept' OR f.id = '$invitee'
+                                                            )   
+                                                            -- AND
+                                                            -- e.invited_department = '$inv_dept'
+                                                            AND
+                                                            d.role = f.id AND
+                                                            e.event_id = '$event_id'
+                                                    GROUP BY d.id_number";
+
+            }
+            elseif($invitee == 2) {
+
+                // Student
+                $sql = "SELECT a.*, b.*, c.*, d.*, e.*, f.* FROM tbl_student a, 
+                                                        tbl_course b, 
+                                                        tbl_department c,
+                                                        tbl_users d, 
+                                                        tbl_event e,
+                                                        tbl_role f 
+                                            
+                                                    WHERE 
+                                                            (
+                                                                a.school_id_number = d.id_number
+                                                            ) 
+                                                            AND 
+                                                            (
+                                                                a.course_id = b.id AND b.dept_id = c.id 
+                                                            ) 
+                                                            AND 
+                                                            (
+                                                                c.id = '$inv_dept' AND b.dept_id = '$inv_dept'
+                                                            ) 
+                                                            -- AND
+                                                            -- e.invited_department = '$inv_dept'
+                                                            AND
+                                                            d.role = f.id AND
+                                                            e.event_id = '$event_id' 
+                                                    GROUP BY d.id_number";
+
+            }
+            elseif ($invitee == 4) {
+
+                // Faculty
+                $sql = "SELECT a.*, c.*, d.*, e.*, f.* FROM tbl_faculty a, 
+                                                        tbl_department c,
+                                                        tbl_users d, 
+                                                        tbl_event e,
+                                                        tbl_role f 
+                                            
+                                                    WHERE 
+                                                            (
+                                                                a.school_id_number = d.id_number
+                                                            ) AND 
+                                                            a.dept_id = c.id AND
+                                                            d.role = f.id AND 
+                                                            c.id = '$department_id' AND 
+                                                            e.event_id = '$event_id' 
+                                                    GROUP BY d.id_number";
+
+            }
         }
         else {
 
-        }
+            if($inv_dept == 6 && $invitee == 5) {
 
-    
+                $sql = "SELECT a.*, b.*, c.* FROM tbl_users a,
+                                                tbl_event b,
+                                                tbl_role c
+                                                
+                                                WHERE 
+                                                a.role = c.id AND
+                                                b.event_id = '$event_id' AND
+                                                (a.role = '$invitee' OR a.role_all = '$invitee')";
+            }
+            else if($invitee == 2 || $invitee == 4) {
+
+                // Student or faculty
+                $sql = "SELECT a.*, b.*, c.*, d.*, e.*, f.* FROM tbl_student a, 
+                                                        tbl_course b, 
+                                                        tbl_department c,
+                                                        tbl_users d, 
+                                                        tbl_event e,
+                                                        tbl_role f, 
+                                                        tbl_faculty g
+                                            
+                                                    WHERE 
+                                                            (
+                                                                a.school_id_number = d.id_number OR 
+                                                                g.school_id_number = d.id_number
+                                                            ) 
+                                                            AND 
+                                                            (
+                                                                a.course_id = b.id AND b.dept_id = c.id AND g.dept_id = c.id
+                                                            ) 
+                                                            AND 
+                                                            (
+                                                                c.id = '$inv_dept' AND b.dept_id = '$inv_dept' AND f.id = '$invitee'
+                                                            )   
+                                                            -- AND
+                                                            -- e.invited_department = '$inv_dept'
+                                                            AND
+                                                            d.role = f.id AND
+                                                            e.event_id = '$event_id'
+                                                    GROUP BY d.id_number";
+
+                       
+            }
+            else if($invitee == 5) {
+
+                $sql = "SELECT a.*, b.*, c.*, d.*, e.*, f.* FROM tbl_student a, 
+                                                        tbl_course b, 
+                                                        tbl_department c,
+                                                        tbl_users d, 
+                                                        tbl_event e,
+                                                        tbl_role f, 
+                                                        tbl_faculty g
+                                            
+                                                    WHERE 
+                                                            (
+                                                                a.school_id_number = d.id_number OR 
+                                                                g.school_id_number = d.id_number
+                                                            ) 
+                                                            AND 
+                                                            (
+                                                                a.course_id = b.id AND b.dept_id = c.id AND g.dept_id = c.id
+                                                            ) 
+                                                            AND 
+                                                            (
+                                                                c.id = '$inv_dept' AND b.dept_id = '$inv_dept' OR f.id = '$invitee'
+                                                            )   
+                                                            -- AND
+                                                            -- e.invited_department = '$inv_dept'
+                                                            AND
+                                                            d.role = f.id AND
+                                                            e.event_id = '$event_id'
+                                                    GROUP BY d.id_number";
+                
+            }
+
+        }
 
         $query = $this->connection->query($sql);
  
@@ -307,71 +535,22 @@ class FetchEvent extends DbConnection{
                             echo 'badge-primary';
                         }
                         else if($row['role_desc'] == 'faculty') {
-                            echo 'badge-warning';
+                            echo 'badge-secondary';
                         }
                         else if($row['role_desc'] == 'admin') {
                             echo 'badge-success';
+                        }
+                        else if($row['role_desc'] == 'department head') {
+                            echo 'badge-warning';
                         }
                         else {
                             echo 'n';
                         }
                 echo '">'.ucfirst($row['role_desc']).'</span></td>
-                        <td>'.$row['lastname'].', '.$row['firstname'].' '.$row['lastname'].'</td>
+                        <td>'.$row['lastname'].', '.$row['firstname'].' '.$row['middlename'].'</td>
                         <td>'.$row['mobile_number'].'</td>
                         <td>
-                            <a href="?send_sms=one&number='.$row['mobile_number'].'&inv_dept='.$inv_dept.'&invitee='.$invitee.'&event_id='.$event_id.'" class="btn btn-primary btn-sm">Send</a>';
-                        // if($row['status'] == 'approved'){
-                        //     echo '<a href="view-event.php?id='.$row['event_id'].'" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</a>';
-                        // }else{
-                        //     echo '<a href="send_sms.php?inv_role='.$row['invited_role'].'&inv_course='.$row['invited_course'].'" class="btn btn-primary btn-sm">Send Message</a>';
-                        // }
-                echo    '</td>
-                    </tr>';
-
-            }
-        }
-        else{
-            // echo 'None';
-        }
-    }
-
-    //Events Details Recipient Faculty
-    public function getEventRecipient_Faculty(){
-
-        $inv_dept = isset($_GET['inv_dept']) ? $_GET['inv_dept'] : '';
-        $invitee = isset($_GET['invitee']) ? $_GET['invitee'] : '';
-        $event_id = isset($_GET['event_id']) ? $_GET['event_id'] : '';
-        $event_type = isset($_GET['event_type']) ? $_GET['event_type'] : '';
-        $department_id = isset($_SESSION['department_id']) ? $_SESSION['department_id'] : "";
-
-        if($event_type == 1) {
-
-            // Department Head All Invited - event type = 1
-            $sql = "SELECT a.*, b.*, c.*, d.*, e.* FROM tbl_faculty a,
-                                                        tbl_department b,
-                                                        tbl_users c,
-                                                        tbl_event d,
-                                                        tbl_role e
-                                            
-                                                    WHERE a.dept_id = b.id AND
-                                                            a.school_id_number = c.id_number AND
-                                                            e.id = c.role AND d.event_id = '$event_id'";
-        }
-
-    
-
-        $query = $this->connection->query($sql);
- 
-        if($query->num_rows > 0){
-            while($row = $query->fetch_assoc()){
-                echo '<tr>
-                        <td>'.$row['title'].'</td>
-                        <td>'.$row['id_number'].'</td>
-                        <td><span class="badge badge-primary">'.ucfirst($row['role_desc']).'</span></td>
-                        <td>'.$row['lastname'].', '.$row['firstname'].' '.$row['lastname'].'</td>
-                        <td>'.$row['mobile_number'].'</td>
-                        <td>
-                            <a href="?send_sms=one&number='.$row['mobile_number'].'&inv_dept='.$inv_dept.'&invitee='.$invitee.'&event_id='.$event_id.'" class="btn btn-primary btn-sm">Send</a>';
+                            <a href="?send_sms=one&number='.$row['mobile_number'].'&inv_dept='.$inv_dept.'&invitee='.$invitee.'&event_id='.$event_id.'&event_type='.$row['event_type'].'" class="btn btn-primary btn-sm">Send</a>';
                         // if($row['status'] == 'approved'){
                         //     echo '<a href="view-event.php?id='.$row['event_id'].'" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</a>';
                         // }else{
@@ -414,17 +593,25 @@ class FetchEvent extends DbConnection{
             $message .=  ''.PHP_EOL;
         }
 
-        $url = 'https://www.itexmo.com/php_api/api.php';
+        $ch = curl_init();
+        // $url = 'https://www.itexmo.com/php_api/api.php';
         $itexmo = array('1' => $number, '2' => $message, '3' => $apicode, 'passwd' => $passwd);
-        $param = array(
-                'http'    => array(
-                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method'  => 'POST',
-                'content' => http_build_query($itexmo),
-            ),
-        );
-        $context  = stream_context_create($param);
-        return file_get_contents($url, false, $context);
+        // $param = array(
+        //         'http'    => array(
+        //         'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+        //         'method'  => 'POST',
+        //         'content' => http_build_query($itexmo),
+        //     ),
+        // );
+        // $context  = stream_context_create($param);
+        // return file_get_contents($url, false, $context);
+
+        curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($itexmo));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        return curl_exec ($ch);
+        curl_close ($ch); 
         
     }
  
@@ -439,26 +626,47 @@ if(isset($_GET['send_sms'])) {
     $inv_dept = isset($_GET['inv_dept']) ? $_GET['inv_dept'] : '';
     $invitee = isset($_GET['invitee']) ? $_GET['invitee'] : '';
     $event_id = isset($_GET['event_id']) ? $_GET['event_id'] : '';
+    $event_type = isset($_GET['event_type']) ? $_GET['event_type'] : '';
 
     if(isset($_GET['send_sms']) == 'one'){
-
-        $event_id = isset($_GET['event_id']) ? $_GET['event_id'] : '';
     
         $sms = new FetchEvent();
         
         $result = $sms->itexmo($event_id);
+
+        // $_SESSION['res'] = $result;
+
     
         if ($result == ""){
+
+            $_SESSION['message'] = "iTexMo: No response from server!!!";
+
             echo "iTexMo: No response from server!!!
             Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
             Please CONTACT US for help. ";	
         }
         else if ($result == 0){
+
             $_SESSION['message'] = "Message Sent!";
-            header("location: send_sms.php?invitee=".$invitee."&event_id=".$event_id);
+
+            if($_SESSION['role'] == 1){
+                header("location: send-sms.php?inv_dept=".$inv_dept."&invitee=".$invitee."&event_id=".$event_id);
+            }
+            else {
+                header("location: send_sms.php?inv_dept=".$inv_dept."&invitee=".$invitee."&event_id=".$event_id."&event_type=".$event_type);
+            }
+            
         }
         else{	
-            echo "Error Num ". $result . " was encountered!";
+            $_SESSION['message'] = "Unable to send!";
+
+            if($_SESSION['role'] == 1){
+                header("location: send-sms.php?inv_dept=".$inv_dept."&invitee=".$invitee."&event_id=".$event_id);
+            }
+            else {
+                header("location: send_sms.php?inv_dept=".$inv_dept."&invitee=".$invitee."&event_id=".$event_id."&event_type=".$event_type);
+            }
+            // echo "Error Num ". $result . " was encountered!";
         }
     }
     else {

@@ -40,7 +40,6 @@
                     
                         
                 </div>
-                <p class="mb-4">Lorem Ipsum.</p>
 
                 <?php
 

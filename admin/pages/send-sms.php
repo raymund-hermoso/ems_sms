@@ -1,6 +1,6 @@
 <?php
     include_once('../../include/session_admin_auth.php');
-    include_once('../../class/FetchCourse.php');
+    include_once('../../class/FetchEvent.php');
     include_once('../include/header.php');
 ?>
 <!-- Page Wrapper -->
@@ -21,12 +21,7 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">
-                        <?php 
-                            $department = new FetchDepartment();
-                            $department->getDepartmentHeading();
-                        ?>
-                    </h1>
+                    <h1 class="h3 mb-0 text-gray-800">Event SMS Recipient</h1>
                     <?php
                         if(isset($_SESSION['message'])){
                     ?>
@@ -38,38 +33,47 @@
                             </div>
                     <?php
 
-                            unset($_SESSION['message']);
+                            // unset($_SESSION['message']);
                         }
                     ?>
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#AddCourseModal">
-                        <i class="fas fa-plus fa-sm text-white-50"></i> Add Course</a>
                         
                 </div>
 
-                <!-- DataTales Example -->
                 <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">List</h6>
+                    <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Select a Recipient (Max 100)</h6>
+                        
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            Send to All
+                        </a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Course</th>
+                                        <th>Title</th>
+                                        <th>ID Number</th>
+                                        <th>Role</th>
+                                        <th>Name</th>
+                                        <th>Number</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Course</th>
+                                        <th>Title</th>
+                                        <th>ID Number</th>
+                                        <th>Role</th>
+                                        <th>Name</th>
+                                        <th>Number</th>
                                         <th>Actions</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
                                 <?php 
-                                    $course = new FetchCourse();
-                                    $course->getCourse();
+                                    $event = new FetchEvent();
+                                    $event->getEventRecipient();
                                 ?>
                                 </tbody>
                             </table>
@@ -90,31 +94,6 @@
 </div>
 <!-- End of Page Wrapper -->
 
-<!-- Add Course Modal-->
-<div class="modal fade" id="AddCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <form class="user" method="POST" action="../../include/add_course_process.php">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Course</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <input type="hidden" value="3" name="dept_id">
-                        <input type="text" class="form-control form-control-user" placeholder="Enter Course Name" name="course" autofocus>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" name="add_course" class="btn btn-primary btn-user btn-block">Add</button>
-                    <button class="btn btn-secondary btn-user btn-block" type="button" data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
 
 <?php
     include '../include/footer.php';

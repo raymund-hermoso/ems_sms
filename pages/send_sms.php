@@ -18,7 +18,7 @@
 								<div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
 									<h6 class="m-0 font-weight-bold text-primary">Select a Recipient (Max 100)</h6>
 									
-									<a href="?send_sms=all" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+									<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
 										Send to All
 									</a>
 								</div>

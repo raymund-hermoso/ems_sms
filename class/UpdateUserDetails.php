@@ -8,31 +8,8 @@ class UpdateUserDetails extends DbConnection{
         parent::__construct();
     }
 
-    public function update_role_student($school_id_number_student, $role){
-        $sql = "UPDATE tbl_users SET role = '$role' WHERE id_number = '$school_id_number_student'";
-        $query = $this->connection->query($sql);
-
-        if ($query === TRUE) {
-            $_SESSION['message'] = 'Account successfully created';
-            header('location:../index.php');
-        } else {
-            return false;
-        }
-    }
-
-    public function update_role_department_head($school_id_number_dh, $role){
-        $sql = "UPDATE tbl_users SET role = '$role' WHERE id_number = '$school_id_number_dh'";
-        $query = $this->connection->query($sql);
-
-        if ($query === TRUE) {
-            $_SESSION['message'] = 'Account successfully created2';
-            header('location:../index.php');
-        } else {
-            return false;
-        }
-    }
-    public function update_role_faculty($school_id_number_faculty, $role){
-        $sql = "UPDATE tbl_users SET role = '$role' WHERE id_number = '$school_id_number_faculty'";
+    public function update_role($school_id_number, $role){
+        $sql = "UPDATE tbl_users SET role = '$role' WHERE id_number = '$school_id_number'";
         $query = $this->connection->query($sql);
 
         if ($query === TRUE) {

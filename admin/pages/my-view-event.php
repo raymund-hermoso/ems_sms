@@ -70,8 +70,7 @@
             <div class="modal-body">Select "Okay" below to approve the Event.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-success" href="../../include/event_process.php?approve_event_id=<?php echo isset($_GET['id']) ? $_GET['id'] : "" ?>&date_start=<?php echo isset($_GET['date_start']) ? $_GET['date_start'] : "" ?>&time_start=<?php echo isset($_GET['time_start']) ? $_GET['time_start'] : "" ?>">Okay</a>
-                
+                <a class="btn btn-success" href="../../include/event_process.php?approve_event_id=<?php echo isset($_GET['id']) ? $_GET['id'] : "" ?>">Okay</a>
             </div>
         </div>
     </div>

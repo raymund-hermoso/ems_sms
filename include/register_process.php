@@ -31,6 +31,7 @@ if(isset($_POST['register'])){
 	$school_id_number_student = $user->check_id_number_student($id_number);
 	$school_id_number_dh = $user->check_id_number_dh($id_number);
 	$school_id_number_faculty = $user->check_id_number_faculty($id_number);
+	$school_id_number_jo = $user->check_id_number_jo($id_number);
 
 	// $check_password = $user->check_password($password);
 
@@ -61,7 +62,7 @@ if(isset($_POST['register'])){
 	else if($school_id_number_student !== false){
 		if($insert_user->add_user($id_number, $firstname, $middlename, $lastname, $email, $mobile_number, $username, $password)){
 			$role = 2;
-			$update_user->update_role_student($school_id_number_student, $role);
+			$update_user->update_role($school_id_number_student, $role);
 		}
 		else{
 			echo 'error2';
@@ -70,7 +71,7 @@ if(isset($_POST['register'])){
 	else if($school_id_number_dh !== false){
 		if($insert_user->add_user($id_number, $firstname, $middlename, $lastname, $email, $mobile_number, $username, $password)){
 			$role = 3;
-			$update_user->update_role_department_head($school_id_number_dh, $role);
+			$update_user->update_role($school_id_number_dh, $role);
 		}
 		else{
 			echo 'error3';
@@ -79,7 +80,16 @@ if(isset($_POST['register'])){
 	else if($school_id_number_faculty !== false){
 		if($insert_user->add_user($id_number, $firstname, $middlename, $lastname, $email, $mobile_number, $username, $password)){
 			$role = 4;
-			$update_user->update_role_faculty($school_id_number_faculty, $role);
+			$update_user->update_role($school_id_number_faculty, $role);
+		}
+		else{
+			echo 'error3';
+		}
+	}
+	else if($school_id_number_jo !== false){
+		if($insert_user->add_user($id_number, $firstname, $middlename, $lastname, $email, $mobile_number, $username, $password)){
+			$role = 6;
+			$update_user->update_role($school_id_number_jo, $role);
 		}
 		else{
 			echo 'error3';

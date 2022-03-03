@@ -1,5 +1,17 @@
 <?php 
 	if(isset($_SESSION['user_id'])){
+
+		$time_passed = time() - $_SESSION["login_time_stamp"];
+
+        if($time_passed > 1800) {
+
+            session_unset();
+            session_destroy();
+
+            header("Location:../");
+            
+        }
+
 		include_once('../../class/FetchUser.php');
 		$user = new FetchUser();
 		
@@ -7,6 +19,8 @@
 		$sql = "SELECT * FROM tbl_users WHERE user_id = '".$_SESSION['user_id']."'";
 		$row = $user->details($sql);
 	}
+
+	// var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">

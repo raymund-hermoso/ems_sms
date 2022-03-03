@@ -41,7 +41,6 @@
                         <i class="fas fa-plus fa-sm text-white-50"></i> Add Faculty</a>
                         
                 </div>
-                <p class="mb-4">Lorem Ipsum.</p>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
@@ -54,6 +53,7 @@
                                 <thead>
                                     <tr>
                                         <th>ID Number</th>
+                                        <th>Department</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Mobile Number</th>
@@ -64,6 +64,7 @@
                                 <tfoot>
                                     <tr>
                                         <th>ID Number</th>
+                                        <th>Department</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Mobile Number</th>

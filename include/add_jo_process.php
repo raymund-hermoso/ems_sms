@@ -11,20 +11,19 @@ $insert_faculty = new InsertUserDetails();
 if(isset($_POST['add_faculty'])){
 
 	$id_number = $user->escape_string($_POST['id_number']);
-	$dept_id = $user->escape_string($_POST['dept_id']);
 
-    $check_id_number_faculty = $user->check_id_number_faculty($id_number);
+    $check_id_number_faculty = $user->check_id_number_jo($id_number);
 	$check_id_number_users = $user->check_id_number($id_number);
  
 	if($check_id_number_faculty || $check_id_number_users){
 		$_SESSION['message'] = 'ID Number Already Exists';
-        header('location:../admin/pages/faculty.php');
+        header('location:../admin/pages/jo.php');
 	}
 	else{
-		$add_faculty = $insert_faculty->add_faculty($id_number, $dept_id);
+		$add_faculty = $insert_faculty->add_jo($id_number);
 	}
 }
 else{
 	$_SESSION['message'] = 'Error';
-	header('location:../admin/pages/faculty.php');
+	header('location:../admin/pages/jo.php');
 }

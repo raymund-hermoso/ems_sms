@@ -41,7 +41,6 @@
                         <i class="fas fa-plus fa-sm text-white-50"></i> Add Department Head</a>
                         
                 </div>
-                <p class="mb-4">Lorem Ipsum.</p>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">

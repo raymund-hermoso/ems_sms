@@ -50,6 +50,19 @@ class InsertUserDetails extends DbConnection{
     }
 
     //
+    public function add_jo($id_number){
+        $sql = "INSERT INTO tbl_jo (school_id_number) VALUES ('$id_number')";
+        $query = $this->connection->query($sql);
+
+        if ($query === TRUE) {
+            $_SESSION['message'] = 'New Job Order added';
+            header('location:../admin/pages/jo.php');
+        } else {
+            return false;
+        }
+    }
+
+    //
     public function add_dh($id_number, $department){
         $sql = "INSERT INTO tbl_department_head (school_id_number, department_id) VALUES ('$id_number', '$department')";
         $query = $this->connection->query($sql);
@@ -70,6 +83,10 @@ class InsertUserDetails extends DbConnection{
  
         if ($query === TRUE) {
             $_SESSION['user_id'] = $auth;
+
+            // Login time is stored in a session variable
+            $_SESSION["login_time_stamp"] = time(); 
+
             if($_SESSION['role'] == 1){
                 header('location: ../admin/pages/event.php');
             }

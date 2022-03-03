@@ -1,5 +1,17 @@
 <?php 
-	if(isset($_SESSION['user_id'])){
+	if(isset($_SESSION['user_id'])) {
+
+        $time_passed = time() - $_SESSION["login_time_stamp"];
+
+        if($time_passed > 1800) {
+
+            session_unset();
+            session_destroy();
+            
+            header("Location:../");
+            
+        }
+
 		include_once('../class/FetchUser.php');
 		$user = new FetchUser();
 		

@@ -14,8 +14,9 @@ if(isset($_POST['add_dh'])){
 	$department = $user->escape_string($_POST['department']);
 
     $check_id_number_dh = $user->check_id_number_dh($id_number);
+	$check_id_number_users = $user->check_id_number($id_number);
  
-	if($check_id_number_dh){
+	if($check_id_number_dh || $check_id_number_users){
 		$_SESSION['message'] = 'ID Number Already Exists';
         header('location:../admin/pages/department_head.php');
 	}

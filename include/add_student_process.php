@@ -14,8 +14,9 @@ if(isset($_POST['add_student'])){
 	$course = $user->escape_string($_POST['course']);
 
     $check_id_number_student = $user->check_id_number_student($id_number);
+	$check_id_number_users = $user->check_id_number($id_number);
  
-	if($check_id_number_student){
+	if($check_id_number_student || $check_id_number_users){
 		$_SESSION['message'] = 'ID Number Already Exists';
         header('location:../admin/pages/student.php');
 	}

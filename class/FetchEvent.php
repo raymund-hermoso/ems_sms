@@ -1,5 +1,6 @@
 <?php
 include_once('DbConnection.php');
+include_once('InsertUserDetails.php');
  
 class FetchEvent extends DbConnection{
  
@@ -399,9 +400,9 @@ class FetchEvent extends DbConnection{
                                                         tbl_department c,
                                                         tbl_users d, 
                                                         tbl_event e,
-                                                        tbl_role f 
+                                                        tbl_role f
                                             
-                                                    WHERE 
+                                                    WHERE
                                                             (
                                                                 a.school_id_number = d.id_number
                                                             ) 
@@ -416,8 +417,9 @@ class FetchEvent extends DbConnection{
                                                             -- AND
                                                             -- e.invited_department = '$inv_dept'
                                                             AND
-                                                            d.role = f.id AND
-                                                            e.event_id = '$event_id' 
+                                                            d.role = f.id 
+                                                            AND
+                                                            e.event_id = '$event_id'
                                                     GROUP BY d.id_number";
 
             }
@@ -526,6 +528,7 @@ class FetchEvent extends DbConnection{
  
         if($query->num_rows > 0){
             while($row = $query->fetch_assoc()){
+
                 echo '<tr>
                         <td>'.$row['title'].'</td>
                         <td>'.$row['id_number'].'</td>
@@ -548,9 +551,25 @@ class FetchEvent extends DbConnection{
                         }
                 echo '">'.ucfirst($row['role_desc']).'</span></td>
                         <td>'.$row['lastname'].', '.$row['firstname'].' '.$row['middlename'].'</td>
-                        <td>'.$row['mobile_number'].'</td>
+                        <td>'.$row['mobile_number'].'</td>';
+
+                        $sql_sms = "SELECT * FROM tbl_sms_recipient WHERE school_id_number = '".$row['school_id_number']."' AND event_id = '".$row['event_id']."'";
+                        $query_sms = $this->connection->query($sql_sms);
+
+                        if($query_sms->num_rows > 0){
+                            $broadcast = '<span class="badge badge-success">Broadcast</span>';
+                        }
+                        else {
+                            $broadcast = '<span class="badge badge-warning">Non-Broadcast</span>';
+                        }
+
+                echo    '<td>'.$broadcast.'</td>
                         <td>
-                            <a href="?send_sms=one&number='.$row['mobile_number'].'&inv_dept='.$inv_dept.'&invitee='.$invitee.'&event_id='.$event_id.'&event_type='.$row['event_type'].'" class="btn btn-primary btn-sm">Send</a>';
+                            <a class="';
+                            if($query_sms->num_rows > 0){
+                                echo 'disabled ';
+                            }
+                            echo 'btn btn-primary btn-sm" href="?send_sms=one&school_id_number='.$row['school_id_number'].'&number='.$row['mobile_number'].'&inv_dept='.$inv_dept.'&invitee='.$invitee.'&event_id='.$event_id.'&event_type='.$row['event_type'].'" >Send</a>';
                         // if($row['status'] == 'approved'){
                         //     echo '<a href="view-event.php?id='.$row['event_id'].'" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</a>';
                         // }else{
@@ -614,6 +633,31 @@ class FetchEvent extends DbConnection{
         curl_close ($ch); 
         
     }
+
+    public function broadcast($school_id_number, $event_id){
+
+        $inv_dept = isset($_GET['inv_dept']) ? $_GET['inv_dept'] : '';
+        $invitee = isset($_GET['invitee']) ? $_GET['invitee'] : '';
+        $event_id = isset($_GET['event_id']) ? $_GET['event_id'] : '';
+        $event_type = isset($_GET['event_type']) ? $_GET['event_type'] : '';
+
+        $sql_broadcast = "INSERT INTO tbl_sms_recipient (school_id_number, event_id, sent) VALUES ('".$school_id_number."', '".$event_id."', 1)";
+        $query = $this->connection->query($sql_broadcast);
+
+        if ($query === TRUE) {
+
+            $_SESSION['message'] = "Message Sent!";
+            if($_SESSION['role'] == 1){
+                header("location: send-sms.php?inv_dept=".$inv_dept."&invitee=".$invitee."&event_id=".$event_id);
+            }
+            else {
+                header("location: send_sms.php?inv_dept=".$inv_dept."&invitee=".$invitee."&event_id=".$event_id."&event_type=".$event_type);
+            }
+        } else {
+            return false;
+        }
+
+    }
  
     public function escape_string($value){
  
@@ -647,15 +691,11 @@ if(isset($_GET['send_sms'])) {
         }
         else if ($result == 0){
 
-            $_SESSION['message'] = "Message Sent!";
+            $school_id_number = isset($_GET['school_id_number']) ? $_GET['school_id_number'] : '';
+            $event_id = isset($_GET['event_id']) ? $_GET['event_id'] : '';
 
-            if($_SESSION['role'] == 1){
-                header("location: send-sms.php?inv_dept=".$inv_dept."&invitee=".$invitee."&event_id=".$event_id);
-            }
-            else {
-                header("location: send_sms.php?inv_dept=".$inv_dept."&invitee=".$invitee."&event_id=".$event_id."&event_type=".$event_type);
-            }
-            
+            $result_broadcast = $sms->broadcast($school_id_number, $event_id);
+
         }
         else{	
             $_SESSION['message'] = "Unable to send!";

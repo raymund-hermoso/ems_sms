@@ -32,6 +32,7 @@
 													<th>Role</th>
 													<th>Name</th>
 													<th>Number</th>
+													<th>Status</th>
 													<th>Actions</th>
 												</tr>
 											</thead>
@@ -42,6 +43,7 @@
 													<th>Role</th>
 													<th>Name</th>
 													<th>Number</th>
+													<th>Status</th>
 													<th>Actions</th>
 												</tr>
 											</tfoot>

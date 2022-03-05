@@ -553,7 +553,7 @@ class FetchEvent extends DbConnection{
                         <td>'.$row['lastname'].', '.$row['firstname'].' '.$row['middlename'].'</td>
                         <td>'.$row['mobile_number'].'</td>';
 
-                        $sql_sms = "SELECT * FROM tbl_sms_recipient WHERE school_id_number = '".$row['school_id_number']."' AND event_id = '".$row['event_id']."'";
+                        $sql_sms = "SELECT * FROM tbl_sms_recipient WHERE school_id_number = '".$row['id_number']."' AND event_id = '".$row['event_id']."'";
                         $query_sms = $this->connection->query($sql_sms);
 
                         if($query_sms->num_rows > 0){
@@ -569,7 +569,7 @@ class FetchEvent extends DbConnection{
                             if($query_sms->num_rows > 0){
                                 echo 'disabled ';
                             }
-                            echo 'btn btn-primary btn-sm" href="?send_sms=one&school_id_number='.$row['school_id_number'].'&number='.$row['mobile_number'].'&inv_dept='.$inv_dept.'&invitee='.$invitee.'&event_id='.$event_id.'&event_type='.$row['event_type'].'" >Send</a>';
+                            echo 'btn btn-primary btn-sm" href="?send_sms=one&school_id_number='.$row['id_number'].'&number='.$row['mobile_number'].'&inv_dept='.$inv_dept.'&invitee='.$invitee.'&event_id='.$event_id.'&event_type='.$row['event_type'].'" >Send</a>';
                         // if($row['status'] == 'approved'){
                         //     echo '<a href="view-event.php?id='.$row['event_id'].'" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</a>';
                         // }else{

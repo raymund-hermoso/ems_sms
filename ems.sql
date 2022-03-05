@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 12, 2022 at 11:11 AM
+-- Generation Time: Mar 05, 2022 at 03:56 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -41,7 +41,9 @@ INSERT INTO `tbl_course` (`id`, `course`, `dept_id`) VALUES
 (7, 'Bachelor of Secondary Education- Mathematics', 2),
 (8, 'Bachelor of Science in Information Technology', 3),
 (11, 'Bachelor of Elementary Education', 2),
-(12, 'BSBA - CBM', 1);
+(12, 'BSBA - CBM', 1),
+(13, 'Course 1', 1),
+(14, 'Course 2', 7);
 
 -- --------------------------------------------------------
 
@@ -65,7 +67,8 @@ INSERT INTO `tbl_department` (`id`, `department_code`, `department_name`) VALUES
 (3, 'CIT', 'College of Information Technology'),
 (4, 'CJC', 'College of Justice and Criminology'),
 (5, 'CAF', 'College of Agriculture and Forestry'),
-(6, 'All', 'All');
+(6, 'All', 'All'),
+(7, 'HLA', 'Hello Lab Ath');
 
 -- --------------------------------------------------------
 
@@ -88,7 +91,8 @@ INSERT INTO `tbl_department_head` (`id`, `school_id_number`, `department_id`) VA
 (2, '21-1235', 2),
 (3, '21-1236', 3),
 (4, '21-1237', 4),
-(5, '21-1238', 5);
+(5, '21-1238', 5),
+(10, '22-0001', 7);
 
 -- --------------------------------------------------------
 
@@ -130,10 +134,11 @@ INSERT INTO `tbl_event` (`event_id`, `title`, `event_desc`, `venue`, `date_start
 (47, 'Lorem2', 'Hello', 'Court', '2022-02-10', '2022-02-10', '10:00:00', '00:00:00', 'posted', '2022-02-09', '04:20:23', 61, 2, 2, '2'),
 (50, 'Event from admin', 'Lorem', 'Plaza', '2022-02-18', '2022-02-18', '10:00:00', '12:00:00', 'posted', '2022-02-11', '02:00:56', 2, 6, 5, '2'),
 (51, 'My Third Event', 'Lorem', 'Anywhere', '2022-02-12', '2022-02-12', '10:00:00', '12:00:00', 'posted', '2022-02-11', '02:30:10', 2, 2, 2, '2'),
-(52, 'Event for CBM', 'Lorem', 'Plaza', '2022-02-14', '2022-02-14', '12:00:00', '15:00:00', 'posted', '2022-02-11', '02:31:36', 2, 1, 5, '2'),
-(53, 'Event for CBM for faculty', 'Lorem', 'Everywhere', '2022-02-15', '2022-02-15', '10:00:00', '12:00:00', 'posted', '2022-02-11', '03:35:28', 2, 1, 4, '2'),
-(54, 'Paro2 G II', 'Lorem', 'Plaza', '2022-02-15', '2022-02-15', '10:00:00', '12:00:00', 'posted', '2022-02-11', '04:05:02', 2, 2, 4, '2'),
-(56, 'My event for this month', 'Hello', 'Everywhere', '2022-02-16', '2022-02-16', '10:10:00', '12:00:00', 'request', '0000-00-00', '00:00:00', 61, 1, 5, '2');
+(52, 'Event for CBM', 'Lorem', 'Plaza', '2022-02-14', '2022-02-14', '12:00:00', '15:00:00', 'approved', '2022-02-11', '02:31:36', 2, 1, 5, '2'),
+(53, 'Event for CBM for faculty', 'Lorem', 'Everywhere', '2022-02-15', '2022-02-15', '10:00:00', '12:00:00', 'request', '2022-02-11', '03:35:28', 2, 1, 4, '2'),
+(54, 'Paro2 G II', 'Lorem', 'Plaza', '2022-02-15', '2022-02-15', '10:00:00', '12:00:00', 'request', '2022-02-11', '04:05:02', 2, 2, 4, '2'),
+(56, 'My event for this month', 'Hello', 'Everywhere', '2022-02-16', '2022-02-16', '10:10:00', '12:00:00', 'approved', '0000-00-00', '00:00:00', 61, 1, 5, '2'),
+(57, 'Allan Event', 'Lorem', 'An', '2022-03-07', '2022-03-07', '10:00:00', '12:00:00', 'posted', NULL, NULL, 71, NULL, 5, '1');
 
 -- --------------------------------------------------------
 
@@ -248,7 +253,38 @@ INSERT INTO `tbl_log` (`id`, `user_id`, `date`, `log_type`) VALUES
 (176, 2, '2022-02-11 09:02:27', 'login'),
 (177, 67, '2022-02-11 12:31:09', 'login'),
 (178, 61, '2022-02-11 12:33:51', 'login'),
-(179, 70, '2022-02-12 18:08:16', 'login');
+(179, 70, '2022-02-12 18:08:16', 'login'),
+(180, 2, '2022-02-13 15:17:19', 'login'),
+(181, 2, '2022-02-14 09:42:19', 'login'),
+(182, 61, '2022-02-14 10:35:39', 'login'),
+(183, 2, '2022-02-14 10:39:39', 'login'),
+(184, 2, '2022-02-16 09:00:01', 'login'),
+(185, 2, '2022-02-16 09:15:21', 'login'),
+(186, 2, '2022-02-16 09:18:05', 'login'),
+(187, 2, '2022-02-16 09:21:03', 'login'),
+(188, 2, '2022-02-16 09:30:23', 'login'),
+(189, 2, '2022-02-16 09:42:38', 'login'),
+(190, 61, '2022-02-16 09:49:00', 'login'),
+(191, 61, '2022-02-16 10:19:21', 'login'),
+(192, 61, '2022-02-16 10:49:48', 'login'),
+(193, 61, '2022-02-16 11:27:36', 'login'),
+(194, 2, '2022-02-23 09:04:28', 'login'),
+(195, 2, '2022-02-23 10:40:26', 'login'),
+(196, 2, '2022-02-23 11:12:36', 'login'),
+(197, 2, '2022-02-23 11:43:08', 'login'),
+(198, 2, '2022-02-27 09:52:41', 'login'),
+(199, 2, '2022-02-27 18:42:56', 'login'),
+(200, 2, '2022-02-27 19:14:41', 'login'),
+(201, 2, '2022-02-27 19:45:26', 'login'),
+(202, 2, '2022-02-28 17:55:42', 'login'),
+(203, 2, '2022-03-03 16:58:30', 'login'),
+(204, 2, '2022-03-04 09:06:14', 'login'),
+(205, 71, '2022-03-04 09:08:49', 'login'),
+(206, 61, '2022-03-05 07:41:40', 'login'),
+(207, 61, '2022-03-05 08:12:17', 'login'),
+(208, 61, '2022-03-05 08:42:30', 'login'),
+(209, 61, '2022-03-05 09:13:26', 'login'),
+(210, 61, '2022-03-05 10:09:49', 'login');
 
 -- --------------------------------------------------------
 
@@ -281,9 +317,18 @@ INSERT INTO `tbl_role` (`id`, `role_desc`) VALUES
 
 CREATE TABLE `tbl_sms_recipient` (
   `id` int(11) NOT NULL,
-  `user_id` int(50) DEFAULT NULL,
-  `event_id` int(50) DEFAULT NULL
+  `school_id_number` varchar(50) NOT NULL,
+  `event_id` int(50) NOT NULL,
+  `sent` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_sms_recipient`
+--
+
+INSERT INTO `tbl_sms_recipient` (`id`, `school_id_number`, `event_id`, `sent`) VALUES
+(2, '12-9636', 45, 1),
+(4, '21-9587', 45, 1);
 
 -- --------------------------------------------------------
 
@@ -345,7 +390,8 @@ INSERT INTO `tbl_users` (`user_id`, `id_number`, `firstname`, `middlename`, `las
 (66, '21-1245', 'Mia', 'Layla', 'Alucard', 'mia@gmail.com', '09854796321', 'mia', '$2y$10$Qh/zDKAFp2BspMcVBHxcse5p1hC0Aa3bju1Ws8.k4WqiP9GRfGm3S', 2, 5),
 (67, '21-6589', 'Alex', 'Sanchez', 'Gamboa', 'alex.g@gmail.com', '09875421369', 'alex', '$2y$10$XOOR/fB.REjQ8UaZlWWX5.ZqnasgCdn4Z2Fgzo8tHwqP57GNeouFm', 2, 5),
 (68, '21-7896', 'Thamuz', 'Lorde', 'Ama', 'muz@gmail.com', '09789456874', 'muz', '$2y$10$sAZT6trxqWUSTYaxYKOvOOUBaKBbFuiheOhYqrka5MFppdjIINQam', 4, 5),
-(70, '21-8484', 'mark', 'roem', 'villar', 'mark@gmail.com', '09789456123', 'mark', '$2y$10$WuGZFoIQq7HPlMaEXgRsKuXHhbubC7MLddyC8888y8yhmmzDZ4OQ.', 6, 5);
+(70, '21-8484', 'mark', 'roem', 'villar', 'mark@gmail.com', '09789456123', 'mark', '$2y$10$WuGZFoIQq7HPlMaEXgRsKuXHhbubC7MLddyC8888y8yhmmzDZ4OQ.', 6, 5),
+(71, '22-0001', 'Allan', 'Marcos', 'Leni', 'marcos@gmail.com', '09789456321', 'marcos', '$2y$10$5DUPOu5k8owZRTHfkBxq1.fnZ290Fy7xtoL4cJmBj1t6AqPRl9HNu', 3, 5);
 
 --
 -- Indexes for dumped tables
@@ -411,8 +457,7 @@ ALTER TABLE `tbl_role`
 --
 ALTER TABLE `tbl_sms_recipient`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `tbl_sms_recipient_ibfk_1` (`user_id`),
-  ADD KEY `tbl_sms_recipient_ibfk_2` (`event_id`);
+  ADD KEY `tbl_sms_recipient_ibfk_1` (`event_id`);
 
 --
 -- Indexes for table `tbl_student`
@@ -436,25 +481,25 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `tbl_course`
 --
 ALTER TABLE `tbl_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_department`
 --
 ALTER TABLE `tbl_department`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_department_head`
 --
 ALTER TABLE `tbl_department_head`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_event`
 --
 ALTER TABLE `tbl_event`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `tbl_faculty`
@@ -472,7 +517,7 @@ ALTER TABLE `tbl_jo`
 -- AUTO_INCREMENT for table `tbl_log`
 --
 ALTER TABLE `tbl_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=180;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
 
 --
 -- AUTO_INCREMENT for table `tbl_role`
@@ -484,7 +529,7 @@ ALTER TABLE `tbl_role`
 -- AUTO_INCREMENT for table `tbl_sms_recipient`
 --
 ALTER TABLE `tbl_sms_recipient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_student`
@@ -496,7 +541,7 @@ ALTER TABLE `tbl_student`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- Constraints for dumped tables
@@ -538,8 +583,7 @@ ALTER TABLE `tbl_log`
 -- Constraints for table `tbl_sms_recipient`
 --
 ALTER TABLE `tbl_sms_recipient`
-  ADD CONSTRAINT `tbl_sms_recipient_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbl_sms_recipient_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `tbl_event` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbl_sms_recipient_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `tbl_event` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_student`
